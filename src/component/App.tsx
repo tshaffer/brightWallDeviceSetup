@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import './App.css';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { 
+  serialNumber,
+  videoWallRowIndex,
+  videoWallColumnIndex,
+ } from '../config/config';
 
 // -----------------------------------------------------------------------
 // Component
@@ -41,20 +45,25 @@ const useStyles = makeStyles({
   bodyDiv: {
     marginTop: '22%'
   }
-    
+
 });
 
 const App = (props: any) => {
 
   const classes = useStyles();
 
+  console.log('render app');
+  
   return (
     <div className={classes.App}>
       <header className={classes.AppHeader}>
         <div className={classes.logoContainerStyle} />
       </header>
       <div className={classes.bodyDiv}>
-        this is the body div
+        BrightWall Device Setup
+        <p>Serial Number:&nbsp;&nbsp;{serialNumber}</p>
+        <p>Row Index:&nbsp;&nbsp;{videoWallRowIndex}</p>
+        <p>Column Index:&nbsp;&nbsp;{videoWallColumnIndex}</p>
       </div>
     </div>
   )
