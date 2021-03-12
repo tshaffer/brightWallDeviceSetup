@@ -3,11 +3,30 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { makeStyles } from '@material-ui/core/styles';
+// import {
+//   serialNumber,
+//   videoWallRowIndex,
+//   videoWallColumnIndex,
+// } from '../config/config';
+import { getBrightSignConfig } from '../controller';
 import { 
-  serialNumber,
-  videoWallRowIndex,
-  videoWallColumnIndex,
- } from '../config/config';
+  getIsBrightWall,
+  getSerialNumber,
+  getIsMaster,
+  getRowIndex,
+  getColumnIndex,
+ } from '../selector';
+
+/** @internal */
+/** @private */
+export interface AppProps {
+  isBrightWall: boolean;
+  serialNumber: string;
+  isMaster: boolean;
+  rowIndex: number;
+  columnIndex: number;
+  onGetBrightSignConfig: () => any;
+}
 
 // -----------------------------------------------------------------------
 // Component
@@ -48,12 +67,15 @@ const useStyles = makeStyles({
 
 });
 
-const App = (props: any) => {
+const App = (props: AppProps) => {
 
   const classes = useStyles();
 
+  // Equivalent to old componentDidMount
+  React.useEffect(props.onGetBrightSignConfig, []);
+
   console.log('render app');
-  
+
   return (
     <div className={classes.App}>
       <header className={classes.AppHeader}>
@@ -61,9 +83,9 @@ const App = (props: any) => {
       </header>
       <div className={classes.bodyDiv}>
         BrightWall Device Setup
-        <p>Serial Number:&nbsp;&nbsp;{serialNumber}</p>
-        <p>Row Index:&nbsp;&nbsp;{videoWallRowIndex}</p>
-        <p>Column Index:&nbsp;&nbsp;{videoWallColumnIndex}</p>
+        <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
+        <p>Row Index:&nbsp;&nbsp;{props.rowIndex}</p>
+        <p>Column Index:&nbsp;&nbsp;{props.columnIndex}</p>
       </div>
     </div>
   )
@@ -71,11 +93,17 @@ const App = (props: any) => {
 
 function mapStateToProps(state: any, ownProps: any): Partial<any> {
   return {
+    isBrightWall: getIsBrightWall(state),
+    serialNumber: getSerialNumber(state),
+    isMaster: getIsMaster(state),
+    rowIndex: getRowIndex(state),
+    columnIndex: getColumnIndex(state),
   };
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators({
+    onGetBrightSignConfig: getBrightSignConfig,
   }, dispatch);
 };
 

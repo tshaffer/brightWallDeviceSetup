@@ -12,8 +12,8 @@ import {
 } from './config';
 import App from './component/App';
 
-const platform = getPlatform();
-console.log(platform);
+// const platform = getPlatform();
+// console.log(platform);
 
 const store = createStore(
   brightWallModelReducer,
