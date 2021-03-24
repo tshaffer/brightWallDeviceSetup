@@ -76,6 +76,14 @@ const App = (props: AppProps) => {
 
   console.log('render app');
 
+  const masterOrSlaveLabel = props.isMaster ? 'Master' : 'Slave';
+
+  let positionLabel;
+  if (props.rowIndex < 0 || props.columnIndex < 0) {
+    positionLabel = 'Position in wall: unassigned';
+  } else {
+    positionLabel = 'Position in wall: row ' + props.rowIndex.toString() + ', column ' + props.columnIndex.toString();
+  }
   return (
     <div className={classes.App}>
       <header className={classes.AppHeader}>
@@ -84,8 +92,8 @@ const App = (props: AppProps) => {
       <div className={classes.bodyDiv}>
         BrightWall Device Setup
         <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
-        <p>Row Index:&nbsp;&nbsp;{props.rowIndex}</p>
-        <p>Column Index:&nbsp;&nbsp;{props.columnIndex}</p>
+        <p>{masterOrSlaveLabel}</p>
+        <p>{positionLabel}</p>
       </div>
     </div>
   )
