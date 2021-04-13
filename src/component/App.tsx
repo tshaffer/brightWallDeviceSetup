@@ -2,6 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import AlignmentPattern from './AlignmentPattern';
+
 import { makeStyles } from '@material-ui/core/styles';
 // import {
 //   serialNumber,
@@ -9,13 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 //   videoWallColumnIndex,
 // } from '../config/config';
 import { getBrightSignConfig } from '../controller';
-import { 
+import {
   getIsBrightWall,
   getSerialNumber,
   getIsMaster,
   getRowIndex,
   getColumnIndex,
- } from '../selector';
+} from '../selector';
 
 /** @internal */
 /** @private */
@@ -61,10 +63,17 @@ const useStyles = makeStyles({
     // background: url('BrightSign_logo_white.png') no-repeat 50% 80%',
     backgroundSize: '400px',
   },
+  vl: {
+    borderLeft: '6px solid green',
+    height: '500px',
+    position: 'absolute',
+    left: '50%',
+    marginLeft: '-3px',
+    top: '0',
+  },
   bodyDiv: {
     marginTop: '22%'
   }
-
 });
 
 const App = (props: AppProps) => {
@@ -84,17 +93,23 @@ const App = (props: AppProps) => {
   } else {
     positionLabel = 'Position in wall: row ' + props.rowIndex.toString() + ', column ' + props.columnIndex.toString();
   }
+  // return (
+  //   <div className={classes.App}>
+  //     <header className={classes.AppHeader}>
+  //       <div className={classes.logoContainerStyle} />
+  //     </header>
+  //     <div className={classes.bodyDiv}>
+  //       BrightWall Device Setup
+  //       <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
+  //       <p>{masterOrSlaveLabel}</p>
+  //       <p>{positionLabel}</p>
+  //     </div>
+  //   </div>
+  // );
+
   return (
-    <div className={classes.App}>
-      <header className={classes.AppHeader}>
-        <div className={classes.logoContainerStyle} />
-      </header>
-      <div className={classes.bodyDiv}>
-        BrightWall Device Setup
-        <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
-        <p>{masterOrSlaveLabel}</p>
-        <p>{positionLabel}</p>
-      </div>
+    <div>
+      <AlignmentPattern/>
     </div>
   )
 };
