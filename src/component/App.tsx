@@ -101,37 +101,37 @@ const App = (props: AppProps) => {
   console.log('brightWallDeviceSetup');
   console.log(props.activeScreen);
 
-  console.log('take 0');
-  return (
-    <div>
-      <AlignmentPattern />
-    </div>
-  );
+  console.log('take 1');
+  // return (
+  //   <div>
+  //     <AlignmentPattern />
+  //   </div>
+  // );
 
-  // switch (props.activeScreen) {
-  //   case 'configureScreen':
-  //     return (
-  //       <div className={classes.App}>
-  //         <header className={classes.AppHeader}>
-  //           <div className={classes.logoContainerStyle} />
-  //         </header>
-  //         <div className={classes.bodyDiv}>
-  //           BrightWall Device Setup
-  //       <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
-  //           <p>{masterOrSlaveLabel}</p>
-  //           <p>{positionLabel}</p>
-  //         </div>
-  //       </div>
-  //     );
-  //   case 'alignScreen':
-  //     return (
-  //       <div>
-  //         <AlignmentPattern />
-  //       </div>
-  //     );
-  //   default:
-  //     return null;
-  // }
+  switch (props.activeScreen) {
+    case 'configureScreen':
+      return (
+        <div className={classes.App}>
+          <header className={classes.AppHeader}>
+            <div className={classes.logoContainerStyle} />
+          </header>
+          <div className={classes.bodyDiv}>
+            BrightWall Device Setup
+        <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
+            <p>{masterOrSlaveLabel}</p>
+            <p>{positionLabel}</p>
+          </div>
+        </div>
+      );
+    case 'alignScreen':
+      return (
+        <div>
+          <AlignmentPattern />
+        </div>
+      );
+    default:
+      return null;
+  }
 
 };
 
