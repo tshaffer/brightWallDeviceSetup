@@ -1,9 +1,18 @@
-import { setColumnIndex, setIsBrightWall, setIsMaster, setNumColumns, setNumRows, setRowIndex, setSerialNumber } from '../model';
+import {
+  setBrightWallDeviceSetupActiveScreen,
+  setColumnIndex,
+  setIsBrightWall,
+  setIsMaster,
+  setNumColumns,
+  setNumRows,
+  setRowIndex,
+  setSerialNumber
+} from '../model';
 import { setPlatform } from '../model/appAttributes';
-import { 
+import {
   tryConvertStringToNumber,
   tryConvertNumberStringToBool,
- } from '../utility';
+} from '../utility';
 
 import Registry from '@brightsign/registry';
 
@@ -36,6 +45,7 @@ export const getBrightSignConfig = () => {
       promises.push(registry.read('networking', 'videoWallRowIndex'));
       promises.push(registry.read('networking', 'videoWallColumnIndex'));
       promises.push(registry.read('networking', 'sync_master'));
+      promises.push(registry.read('networking', 'brightWallDeviceSetupActiveScreen'));
       Promise.all(promises)
         .then((registryValues) => {
           console.log('registryValues retrieved');
@@ -48,6 +58,7 @@ export const getBrightSignConfig = () => {
           dispatch(setRowIndex(tryConvertStringToNumber((registryValues[3] as string), -1)));
           dispatch(setColumnIndex(tryConvertStringToNumber((registryValues[4] as string), -1)));
           dispatch(setIsMaster(tryConvertNumberStringToBool(registryValues[5] as string, false)));
+          dispatch(setBrightWallDeviceSetupActiveScreen(registryValues[6] as string));
         });
 
       console.log('BrightSign configuration retrieved');

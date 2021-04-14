@@ -22,6 +22,7 @@ export interface BrightSignAttributes {
 }
 
 export interface BrightWallConfiguration {
+  activeScreen: string;
   isMaster: boolean;
   rowIndex: number;
   columnIndex: number;

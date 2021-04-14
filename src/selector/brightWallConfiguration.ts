@@ -1,5 +1,9 @@
 import { BrightSignState } from "../type";
 
+export const getActiveScreen = (state: BrightSignState): string => {
+  return state.brightWallConfiguration.activeScreen;
+};
+
 export const getIsMaster = (state: BrightSignState): boolean => {
   return state.brightWallConfiguration.isMaster;
 };

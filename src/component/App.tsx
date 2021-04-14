@@ -17,6 +17,7 @@ import {
   getIsMaster,
   getRowIndex,
   getColumnIndex,
+  getActiveScreen,
 } from '../selector';
 
 /** @internal */
@@ -24,6 +25,7 @@ import {
 export interface AppProps {
   isBrightWall: boolean;
   serialNumber: string;
+  activeScreen: string;
   isMaster: boolean;
   rowIndex: number;
   columnIndex: number;
@@ -78,6 +80,8 @@ const useStyles = makeStyles({
 
 const App = (props: AppProps) => {
 
+  // const [_setupScreen, _setSetupScreen] = React.useState('configureScreen');
+
   const classes = useStyles();
 
   // Equivalent to old componentDidMount
@@ -93,31 +97,49 @@ const App = (props: AppProps) => {
   } else {
     positionLabel = 'Position in wall: row ' + props.rowIndex.toString() + ', column ' + props.columnIndex.toString();
   }
-  // return (
-  //   <div className={classes.App}>
-  //     <header className={classes.AppHeader}>
-  //       <div className={classes.logoContainerStyle} />
-  //     </header>
-  //     <div className={classes.bodyDiv}>
-  //       BrightWall Device Setup
-  //       <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
-  //       <p>{masterOrSlaveLabel}</p>
-  //       <p>{positionLabel}</p>
-  //     </div>
-  //   </div>
-  // );
 
+  console.log('brightWallDeviceSetup');
+  console.log(props.activeScreen);
+
+  console.log('take 0');
   return (
     <div>
-      <AlignmentPattern/>
+      <AlignmentPattern />
     </div>
-  )
+  );
+
+  // switch (props.activeScreen) {
+  //   case 'configureScreen':
+  //     return (
+  //       <div className={classes.App}>
+  //         <header className={classes.AppHeader}>
+  //           <div className={classes.logoContainerStyle} />
+  //         </header>
+  //         <div className={classes.bodyDiv}>
+  //           BrightWall Device Setup
+  //       <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
+  //           <p>{masterOrSlaveLabel}</p>
+  //           <p>{positionLabel}</p>
+  //         </div>
+  //       </div>
+  //     );
+  //   case 'alignScreen':
+  //     return (
+  //       <div>
+  //         <AlignmentPattern />
+  //       </div>
+  //     );
+  //   default:
+  //     return null;
+  // }
+
 };
 
 function mapStateToProps(state: any, ownProps: any): Partial<any> {
   return {
     isBrightWall: getIsBrightWall(state),
     serialNumber: getSerialNumber(state),
+    activeScreen: getActiveScreen(state),
     isMaster: getIsMaster(state),
     rowIndex: getRowIndex(state),
     columnIndex: getColumnIndex(state),

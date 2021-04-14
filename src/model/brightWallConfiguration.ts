@@ -4,6 +4,7 @@ import { BrightWallConfiguration } from '../type';
 // ------------------------------------
 // Constants
 // ------------------------------------
+export const SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN = 'SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN';
 export const SET_IS_MASTER = 'SET_IS_MASTER';
 export const SET_ROW_INDEX = 'SET_ROW_INDEX';
 export const SET_COLUMN_INDEX = 'SET_COLUMN_INDEX';
@@ -13,6 +14,26 @@ export const SET_NUM_COLUMNS = 'SET_NUM_COLUMNS';
 // ------------------------------------
 // Actions
 // ------------------------------------
+
+export interface SetBrightWallDeviceSetupActiveScreenPayload {
+  activeScreen: string;
+}
+type SetBrightWallDeviceSetupActiveScreenAction = BrightWallModelAction<SetBrightWallDeviceSetupActiveScreenPayload>;
+
+export const setBrightWallDeviceSetupActiveScreen = (
+  activeScreen: string,
+): SetBrightWallDeviceSetupActiveScreenAction => {
+  console.log('setBrightWallDeviceSetupActiveScreen');
+  console.log(activeScreen);
+  return {
+    type: SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN,
+    payload: {
+      activeScreen,
+    },
+  };
+};
+
+
 export interface SetIsMasterPayload {
   isMaster: boolean;
 }
@@ -99,6 +120,7 @@ export const setNumColumns = (
 // ------------------------------------
 
 const initialState: BrightWallConfiguration = {
+  activeScreen: 'configureScreen',
   isMaster: false,
   rowIndex: -1,
   columnIndex: -1,
@@ -109,9 +131,16 @@ const initialState: BrightWallConfiguration = {
 
 export const brightWallConfigurationReducer = (
   state: BrightWallConfiguration = initialState,
-  action: SetIsMasterAction & SetRowIndexAction & SetColumnIndexAction & SetNumRowsAction & SetNumColumnsAction,
+  action: SetBrightWallDeviceSetupActiveScreenAction & SetIsMasterAction & SetRowIndexAction & SetColumnIndexAction & SetNumRowsAction & SetNumColumnsAction,
 ): BrightWallConfiguration => {
   switch (action.type) {
+    case SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN:
+      console.log('SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN');
+      console.log(action.payload.activeScreen);
+      return {
+        ...state,
+        activeScreen: action.payload.activeScreen,
+      }
     case SET_IS_MASTER:
       return {
         ...state,
@@ -122,7 +151,6 @@ export const brightWallConfigurationReducer = (
         ...state,
         rowIndex: action.payload.rowIndex,
       };
-      break;
     case SET_COLUMN_INDEX:
       return {
         ...state,
@@ -139,6 +167,9 @@ export const brightWallConfigurationReducer = (
         numColumns: action.payload.numColumns,
       };
     default:
+      console.log('default');
+      console.log(action.type);
+      // console.log(action.payload.activeScreen);
       return state;
   }
 };
