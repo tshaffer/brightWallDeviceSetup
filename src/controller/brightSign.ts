@@ -15,6 +15,7 @@ import {
 } from '../utility';
 
 import Registry from '@brightsign/registry';
+import { isString } from 'lodash';
 
 // export let irReceiver: BSIRReceiver;
 
@@ -57,7 +58,14 @@ export const getBrightSignConfig = () => {
           dispatch(setNumRows(tryConvertStringToNumber((registryValues[2] as string), -1)));
           dispatch(setRowIndex(tryConvertStringToNumber((registryValues[3] as string), -1)));
           dispatch(setColumnIndex(tryConvertStringToNumber((registryValues[4] as string), -1)));
-          dispatch(setIsMaster(tryConvertNumberStringToBool(registryValues[5] as string, false)));
+
+          const isMasterStr: string = registryValues[5] as string;
+          let isMaster: boolean = false;
+          if (isString(isMasterStr) && isMasterStr.toLowerCase() === 'true') {
+            isMaster = true;
+          }
+          dispatch(setIsMaster(isMaster));
+          
           dispatch(setBrightWallDeviceSetupActiveScreen(registryValues[6] as string));
         });
 
