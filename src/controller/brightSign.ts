@@ -40,11 +40,11 @@ export const getBrightSignConfig = () => {
       // const registry = new registryClass();
 
       const promises: Promise<string | object>[] = [];
-      promises.push(registry.read('networking', 'isVideoWall'));
-      promises.push(registry.read('networking', 'videoWallNumColumns'));
-      promises.push(registry.read('networking', 'videoWallNumRows'));
-      promises.push(registry.read('networking', 'videoWallRowIndex'));
-      promises.push(registry.read('networking', 'videoWallColumnIndex'));
+      promises.push(registry.read('networking', 'isBrightWall'));
+      promises.push(registry.read('networking', 'brightWallNumColumns'));
+      promises.push(registry.read('networking', 'brightWallNumRows'));
+      promises.push(registry.read('networking', 'brightWallRowIndex'));
+      promises.push(registry.read('networking', 'brightWallColumnIndex'));
       promises.push(registry.read('networking', 'sync_master'));
       promises.push(registry.read('networking', 'brightWallDeviceSetupActiveScreen'));
       Promise.all(promises)
@@ -65,7 +65,7 @@ export const getBrightSignConfig = () => {
             isMaster = true;
           }
           dispatch(setIsMaster(isMaster));
-          
+
           dispatch(setBrightWallDeviceSetupActiveScreen(registryValues[6] as string));
         });
 

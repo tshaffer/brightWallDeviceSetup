@@ -6,7 +6,7 @@ export let platform: string;
 export let irReceiver: BSIRReceiver;
 export let serialNumber: string;
 
-export let isVideoWall: boolean = false;
+export let isBrightWall: boolean = false;
 export let videoWallNumColumns: number = -1;
 export let videoWallNumRows: number = -1;
 export let videoWallRowIndex: number = -1;
@@ -25,7 +25,7 @@ export const getPlatform = (): string => {
     const BSDeviceInfo = require('BSDeviceInfo');
     const deviceInfo = new BSDeviceInfo();
     serialNumber = deviceInfo.deviceUniqueId;
-  
+
     // videoOutput = new VideoOutput('hdmi');
     // videoOutput.setBackgroundColor(0xffffff);
     const VideoOutputClass = require("@brightsign/videooutput");
@@ -37,7 +37,7 @@ export const getPlatform = (): string => {
     //   console.log('registryValue');
     //   console.log(registryValue);
     // });
-    
+
     console.log('require registry');
     const registryClass = require("@brightsign/registry");
     console.log('instantiate registryClass');
@@ -46,24 +46,24 @@ export const getPlatform = (): string => {
     console.log(registry);
 
     const promises: Promise<string>[] = [];
-    promises.push(registry.read('networking', 'isVideoWall'));
-    promises.push(registry.read('networking', 'videoWallNumColumns'));
-    promises.push(registry.read('networking', 'videoWallNumRows'));
-    promises.push(registry.read('networking', 'videoWallRowIndex'));
-    promises.push(registry.read('networking', 'videoWallColumnIndex'));
+    promises.push(registry.read('networking', 'signType'));
+    promises.push(registry.read('networking', 'brightWallNumColumns'));
+    promises.push(registry.read('networking', 'brightWallNumRows'));
+    promises.push(registry.read('networking', 'brightWallRowIndex'));
+    promises.push(registry.read('networking', 'brightWallColumnIndex'));
     Promise.all(promises)
-    .then ((registryValues) => {
-      if (registryValues[0].toLowerCase() === 'true') {
-        isVideoWall = true;
-      }
-      videoWallNumColumns = tryConvertStringToNumber(registryValues[1], -1);
-      videoWallNumRows = tryConvertStringToNumber(registryValues[2], -1);
-      videoWallRowIndex = tryConvertStringToNumber(registryValues[3], -1);
-      videoWallColumnIndex = tryConvertStringToNumber(registryValues[4], -1);
+      .then((registryValues) => {
+        if (registryValues[0].toLowerCase() === 'brightwall') {
+          isBrightWall = true;
+        }
+        videoWallNumColumns = tryConvertStringToNumber(registryValues[1], -1);
+        videoWallNumRows = tryConvertStringToNumber(registryValues[2], -1);
+        videoWallRowIndex = tryConvertStringToNumber(registryValues[3], -1);
+        videoWallColumnIndex = tryConvertStringToNumber(registryValues[4], -1);
 
-      console.log('registry read complete');
-      // write to redux?
-    });
+        console.log('registry read complete');
+        // write to redux?
+      });
 
     // registry.read('networking', 'un').then ((registryValue: any) => {
     //   console.log('registryValue');
