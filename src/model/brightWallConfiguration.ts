@@ -1,5 +1,5 @@
 import { BrightWallModelAction } from './baseAction';
-import { BrightWallConfiguration } from '../type';
+import { BrightWallConfiguration, DeviceSetupScreen } from '../type';
 
 // ------------------------------------
 // Constants
@@ -120,7 +120,7 @@ export const setNumColumns = (
 // ------------------------------------
 
 const initialState: BrightWallConfiguration = {
-  activeScreen: 'configureScreen',
+  activeScreen: DeviceSetupScreen.ConfigureScreen,
   isMaster: false,
   rowIndex: -1,
   columnIndex: -1,

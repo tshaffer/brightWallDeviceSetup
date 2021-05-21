@@ -29,3 +29,8 @@ export interface BrightWallConfiguration {
   numColumns: number;
   numRows: number;
 }
+
+export enum DeviceSetupScreen {
+  ConfigureScreen = 'ConfigureScreen',
+  AlignScreen = 'AlignScreen',
+}

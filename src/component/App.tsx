@@ -19,6 +19,7 @@ import {
   getColumnIndex,
   getActiveScreen,
 } from '../selector';
+import { DeviceSetupScreen } from '../type';
 
 /** @internal */
 /** @private */
@@ -109,7 +110,7 @@ const App = (props: AppProps) => {
   // );
 
   switch (props.activeScreen) {
-    case 'configureScreen':
+    case DeviceSetupScreen.ConfigureScreen:
       return (
         <div className={classes.App}>
           <header className={classes.AppHeader}>
@@ -123,7 +124,7 @@ const App = (props: AppProps) => {
           </div>
         </div>
       );
-    case 'alignScreen':
+    case DeviceSetupScreen.AlignScreen:
       return (
         <div>
           <AlignmentPattern />
