@@ -23,3 +23,11 @@ export const getNumRows = (state: BrightSignState): number => {
 export const getNumColumns = (state: BrightSignState): number => {
   return state.brightWallConfiguration.numColumns;
 };
+
+export const getScreenWidth = (state: BrightSignState): number => {
+  return state.brightWallConfiguration.screenDimensions.width;
+}
+
+export const getScreenHeight = (state: BrightSignState): number => {
+  return state.brightWallConfiguration.screenDimensions.height;
+}

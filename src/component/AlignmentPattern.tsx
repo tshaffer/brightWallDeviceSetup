@@ -2,6 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { getScreenHeight, getScreenWidth } from '../selector';
+
+export interface AlignmentPatternProps {
+  screenWidth: number;
+  screenHeight: number;
+}
 
 // -----------------------------------------------------------------------
 // Component
@@ -57,7 +63,7 @@ const useStyles = makeStyles({
   }
 });
 
-const AlignmentPattern = () => {
+const AlignmentPattern = (props: AlignmentPatternProps) => {
 
   console.log('AlignmentPattern: render');
 
@@ -77,15 +83,45 @@ const AlignmentPattern = () => {
       </div>
     );
   */
+
+  console.log('alignmentPattern props');
+  console.log(props.screenWidth);
+  console.log(props.screenHeight);
+
+  const background: string = 'url(alignmentPattern.png)';
+  const backgroundRepeat: string = 'repeat';
+  // const backgroundSize: string = '1920px 1080px';
+  const width: string = '1920px';
+  const height: string = '1080px';
+
+  //     <div className={classes.alignmentPattern} />
+
+  // const divStyle = {
+  //   background: 'url(alignmentPattern.png)',
+  //   backgroundRepeat: 'repeat',
+  //   width: '1920px',
+  //   height: '1080px',
+  // };
+
+  // width: width,
+  // height: height,
+
+  const divStyle = {
+    background: background,
+    backgroundRepeat: backgroundRepeat,
+    width: props.screenWidth,
+    height: props.screenHeight,
+  };
+
   return (
-    <div className={classes.alignmentPattern} />
+    <div style={divStyle}/>
   );
-
-
 };
 
 function mapStateToProps(state: any, ownProps: any): Partial<any> {
   return {
+    screenWidth: getScreenWidth(state),
+    screenHeight: getScreenHeight(state),
   };
 }
 
@@ -96,5 +132,37 @@ const mapDispatchToProps = (dispatch: any) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlignmentPattern);
 
+/*
+import classLevelStyles from '../styles/cell.css';
 
+const style = {
+    width:  this.calcWidth()  + 'px',
+    height: this.calcHeight() + 'px',
+};
 
+<div className={classLevelStyles} style={style} />
+*/
+
+/*
+// cell.css
+
+.cell {
+  width: var(--width);
+  height: var(--height);
+}
+Then you can supply the values of the CSS variables in a parent container (CSS variables also cascade down):
+
+<div style={{ '--width': `${something}px`, '--height': `${something}px` }}>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+</div>
+*/
+/*
+<div style={{ height: '10%' }}>
+  Hello World!
+</div>
+*/
+/*
+<span style={{float:'right'}}>Download Audit</span>
+*/

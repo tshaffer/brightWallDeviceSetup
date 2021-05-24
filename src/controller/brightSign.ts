@@ -6,6 +6,7 @@ import {
   setNumColumns,
   setNumRows,
   setRowIndex,
+  setScreenDimensions,
   setSerialNumber
 } from '../model';
 import { setPlatform } from '../model/appAttributes';
@@ -19,12 +20,26 @@ import { isString } from 'lodash';
 
 // export let irReceiver: BSIRReceiver;
 
+var VideoModeConfigurationClass = require("@brightsign/videomodeconfiguration");
+var videoConfig = new VideoModeConfigurationClass();
+
 export const getBrightSignConfig = () => {
   return ((dispatch: any): any => {
     try {
 
       console.log('getBrightSignConfig invoked');
 
+      // const vmPromise = videoConfig.getActiveMode();
+      // vmPromise.then( (mode: any) => {
+      //   console.log('mode');
+      //   console.log(mode);
+      //   console.log(mode.modeName);
+      //   console.log(mode.width);
+      //   console.log(mode.height);
+      //   console.log(mode.graphicsPlaneWidth);
+      //   console.log(mode.graphicsPlaneHeight);
+      // })
+  
       // irReceiver = new BSIRReceiver('IR-in', 'NEC');
       const BSDeviceInfo = require('BSDeviceInfo');
       const deviceInfo = new BSDeviceInfo();
@@ -47,6 +62,7 @@ export const getBrightSignConfig = () => {
       promises.push(registry.read('networking', 'brightWallColumnIndex'));
       promises.push(registry.read('networking', 'sync_master'));
       promises.push(registry.read('networking', 'brightWallDeviceSetupActiveScreen'));
+      promises.push(videoConfig.getActiveMode());
       Promise.all(promises)
         .then((registryValues) => {
           console.log('registryValues retrieved');
@@ -67,6 +83,9 @@ export const getBrightSignConfig = () => {
           dispatch(setIsMaster(isMaster));
 
           dispatch(setBrightWallDeviceSetupActiveScreen(registryValues[6] as string));
+
+          const mode: any = registryValues[7] as any;
+          dispatch(setScreenDimensions(mode.width, mode.height));
         });
 
       console.log('BrightSign configuration retrieved');

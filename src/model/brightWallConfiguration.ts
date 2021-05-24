@@ -1,5 +1,6 @@
 import { BrightWallModelAction } from './baseAction';
 import { BrightWallConfiguration, DeviceSetupScreen } from '../type';
+import { cloneDeep } from 'lodash';
 
 // ------------------------------------
 // Constants
@@ -10,6 +11,7 @@ export const SET_ROW_INDEX = 'SET_ROW_INDEX';
 export const SET_COLUMN_INDEX = 'SET_COLUMN_INDEX';
 export const SET_NUM_ROWS = 'SET_NUM_ROWS';
 export const SET_NUM_COLUMNS = 'SET_NUM_COLUMNS';
+export const SET_SCREEN_DIMENSIONS = 'SET_SCREEN_DIMENSIONS';
 
 // ------------------------------------
 // Actions
@@ -115,6 +117,25 @@ export const setNumColumns = (
   };
 };
 
+export interface SetScreenDimensionsPayload {
+  width: number;
+  height: number;
+}
+type SetScreenDimensionsAction = BrightWallModelAction<SetScreenDimensionsPayload>;
+
+export const setScreenDimensions = (
+  width: number,
+  height: number,
+): SetScreenDimensionsAction => {
+  return {
+    type: SET_SCREEN_DIMENSIONS,
+    payload: {
+      width,
+      height,
+    },
+  };
+};
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
@@ -126,12 +147,22 @@ const initialState: BrightWallConfiguration = {
   columnIndex: -1,
   numRows: -1,
   numColumns: -1,
+  screenDimensions: {
+    width: 1920,
+    height: 1080,
+  }
 };
 
 
 export const brightWallConfigurationReducer = (
   state: BrightWallConfiguration = initialState,
-  action: SetBrightWallDeviceSetupActiveScreenAction & SetIsMasterAction & SetRowIndexAction & SetColumnIndexAction & SetNumRowsAction & SetNumColumnsAction,
+  action: SetBrightWallDeviceSetupActiveScreenAction
+    & SetIsMasterAction
+    & SetRowIndexAction
+    & SetColumnIndexAction
+    & SetNumRowsAction
+    & SetNumColumnsAction
+    & SetScreenDimensionsAction,
 ): BrightWallConfiguration => {
   switch (action.type) {
     case SET_BRIGHTWALL_DEVICE_SETUP_ACTIVE_SCREEN:
@@ -166,6 +197,11 @@ export const brightWallConfigurationReducer = (
         ...state,
         numColumns: action.payload.numColumns,
       };
+    case SET_SCREEN_DIMENSIONS:
+      const newState = cloneDeep(state);
+      newState.screenDimensions.width = action.payload.width;
+      newState.screenDimensions.height = action.payload.height;
+      return newState;
     default:
       console.log('default');
       console.log(action.type);

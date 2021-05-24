@@ -12,9 +12,20 @@ export let videoWallNumRows: number = -1;
 export let videoWallRowIndex: number = -1;
 export let videoWallColumnIndex: number = -1;
 
+var VideoModeConfigurationClass = require("@brightsign/videomodeconfiguration");
+var videoConfig = new VideoModeConfigurationClass();
+
 export const getPlatform = (): string => {
 
   try {
+    
+    const vmPromise = videoConfig.getActiveMode();
+    vmPromise.then( (mode: any) => {
+      console.log('mode');
+      console.log(mode);
+      console.log(mode.modeName);
+    })
+    
     // const gpio = new BSControlPort('BrightSign');
     // console.log('create controlPort: ');
     // console.log(gpio);

@@ -28,6 +28,10 @@ export interface BrightWallConfiguration {
   columnIndex: number;
   numColumns: number;
   numRows: number;
+  screenDimensions: {
+    width: number,
+    height: number,
+  }
 }
 
 export enum DeviceSetupScreen {
