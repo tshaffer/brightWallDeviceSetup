@@ -47,6 +47,13 @@ const useStyles = makeStyles({
   },
   bodyDiv: {
     marginTop: '22%'
+  },
+  alignmentPattern: {
+    background: 'url(alignmentPattern.png)',
+    backgroundRepeat: 'repeat',
+    backgroundSize: '1040px 216px',
+    width: '1040px',
+    height: '216px',
   }
 });
 
@@ -55,44 +62,25 @@ const AlignmentPattern = () => {
   console.log('AlignmentPattern: render');
 
   const classes = useStyles();
-/*
-  return (
-    <div className={classes.App}>
-      <header className={classes.AppHeader}>
-        <div className={classes.logoContainerStyle} />
-      </header>
-      <div className={classes.bodyDiv}>
-        BrightWall Device Setup
-        <p>Serial Number:&nbsp;&nbsp;{'xx068'}</p>
-        <p>{'master'}</p>
-        <p>{'slave'}</p>
-      </div>
-    </div>
-  );
-*/
+  /*
     return (
-        <div className={classes.vl}>
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
-          pizza and burritos and burgers and ice cream and lattes
+      <div className={classes.App}>
+        <header className={classes.AppHeader}>
+          <div className={classes.logoContainerStyle} />
+        </header>
+        <div className={classes.bodyDiv}>
+          BrightWall Device Setup
+          <p>Serial Number:&nbsp;&nbsp;{'xx068'}</p>
+          <p>{'master'}</p>
+          <p>{'slave'}</p>
+        </div>
       </div>
-    ); 
-    
+    );
+  */
+  return (
+    <div className={classes.alignmentPattern} />
+  );
+
 
 };
 
