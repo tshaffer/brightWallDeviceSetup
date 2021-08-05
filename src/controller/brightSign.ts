@@ -1,6 +1,9 @@
+// import os from 'os';
+import * as os from 'os';
 import {
   setBrightWallDeviceSetupActiveScreen,
   setColumnIndex,
+  setIpAddress,
   setIsBrightWall,
   setIsMaster,
   setNumColumns,
@@ -16,12 +19,16 @@ import {
 } from '../utility';
 
 import Registry from '@brightsign/registry';
-import { isString } from 'lodash';
+import { isArray, isString } from 'lodash';
+import { NetworkInterfaceConfig } from '@brightsign/networkconfiguration';
 
 // export let irReceiver: BSIRReceiver;
 
 var VideoModeConfigurationClass = require("@brightsign/videomodeconfiguration");
 var videoConfig = new VideoModeConfigurationClass();
+
+const NetworkConfigClass = require("@brightsign/networkconfiguration");
+const networkConfigEth = new NetworkConfigClass("eth0");
 
 export const getBrightSignConfig = () => {
   return ((dispatch: any): any => {
@@ -29,6 +36,52 @@ export const getBrightSignConfig = () => {
 
       console.log('getBrightSignConfig invoked');
 
+      /*
+{ 1225.581} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61657]: getBrightSignConfig invoked
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61662]: networkInterfaceId
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61663]: lo
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61665]: networkInterfaceInfo.length
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61666]: 2
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: 127.0.0.1
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv4
+{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: ::1
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv6
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61662]: networkInterfaceId
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61663]: eth0
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61665]: networkInterfaceInfo.length
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61666]: 2
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: 192.168.86.37
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv4
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: fe80::92ac:3fff:fe10:16
+{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv6
+      */
+
+      const networkInterfaces = os.networkInterfaces();
+      for (const networkInterfaceId in networkInterfaces) {
+        if (Object.prototype.hasOwnProperty.call(networkInterfaces, networkInterfaceId)) {
+          const networkInterfaceInfo = networkInterfaces[networkInterfaceId];
+          console.log('networkInterfaceId');
+          console.log(networkInterfaceId);
+          if (isArray(networkInterfaceInfo)) {
+            console.log('networkInterfaceInfo.length');
+            console.log(networkInterfaceInfo.length);
+            for (const networkInterface of networkInterfaceInfo) {
+              console.log('networkInterface');
+              console.log(networkInterface.address);
+              console.log(networkInterface.family);
+              // TEDTODO - this code currently only support an ethernet connection
+              if (networkInterfaceId === 'eth0' && networkInterface.family === 'IPv4') {
+                const deviceIpAddress = networkInterface.address;
+                dispatch(setIpAddress(deviceIpAddress));
+              }
+            }
+          }
+        }
+      }
       // const vmPromise = videoConfig.getActiveMode();
       // vmPromise.then( (mode: any) => {
       //   console.log('mode');
@@ -63,6 +116,7 @@ export const getBrightSignConfig = () => {
       promises.push(registry.read('networking', 'sync_master'));
       promises.push(registry.read('networking', 'brightWallDeviceSetupActiveScreen'));
       promises.push(videoConfig.getActiveMode());
+      promises.push(networkConfigEth.getConfig());
       Promise.all(promises)
         .then((registryValues) => {
           console.log('registryValues retrieved');
@@ -86,6 +140,11 @@ export const getBrightSignConfig = () => {
 
           const mode: any = registryValues[7] as any;
           dispatch(setScreenDimensions(mode.width, mode.height));
+
+          const networkConfig = registryValues[8] as NetworkInterfaceConfig;
+          console.log('networkConfig');
+          console.log(networkConfig);
+
         });
 
       console.log('BrightSign configuration retrieved');

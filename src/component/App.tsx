@@ -18,6 +18,7 @@ import {
   getRowIndex,
   getColumnIndex,
   getActiveScreen,
+  getIpAddress,
 } from '../selector';
 import { DeviceSetupScreen } from '../type';
 
@@ -26,6 +27,7 @@ import { DeviceSetupScreen } from '../type';
 export interface AppProps {
   isBrightWall: boolean;
   serialNumber: string;
+  ipAddress: string;
   activeScreen: string;
   isMaster: boolean;
   rowIndex: number;
@@ -103,11 +105,6 @@ const App = (props: AppProps) => {
   console.log(props.activeScreen);
 
   console.log('take 1');
-  // return (
-  //   <div>
-  //     <AlignmentPattern />
-  //   </div>
-  // );
 
   switch (props.activeScreen) {
     case DeviceSetupScreen.ConfigureScreen:
@@ -118,9 +115,10 @@ const App = (props: AppProps) => {
           </header>
           <div className={classes.bodyDiv}>
             BrightWall Device Setup
-        <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
+            <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
             <p>{masterOrSlaveLabel}</p>
             <p>{positionLabel}</p>
+            <p>Navigate to {props.ipAddress}:8088 to configure this device in the BrightWall</p>
           </div>
         </div>
       );
@@ -140,6 +138,7 @@ function mapStateToProps(state: any, ownProps: any): Partial<any> {
   return {
     isBrightWall: getIsBrightWall(state),
     serialNumber: getSerialNumber(state),
+    ipAddress: getIpAddress(state),
     activeScreen: getActiveScreen(state),
     isMaster: getIsMaster(state),
     rowIndex: getRowIndex(state),

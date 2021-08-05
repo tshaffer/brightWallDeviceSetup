@@ -19,6 +19,7 @@ export interface AppAttributes {
 export interface BrightSignAttributes {
   isBrightWall: boolean;
   serialNumber: string;
+  ipAddress: string;
 }
 
 export interface BrightWallConfiguration {
