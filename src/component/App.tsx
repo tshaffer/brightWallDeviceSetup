@@ -111,6 +111,8 @@ const App = (props: AppProps) => {
 
   console.log('take 1');
 
+  //             <p>{positionLabel}</p>
+
   switch (props.activeScreen) {
     case DeviceSetupScreen.ConfigureScreen:
       return (
@@ -132,15 +134,9 @@ const App = (props: AppProps) => {
             <span>&nbsp;&nbsp;{props.macAddress}</span>
             <br/>
 
+            <span className={classes.bold}>Master/Slave:</span>
+            <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
             <br/>
-            <br/>
-
-
-            BrightWall Device Setup
-            <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
-            <p>{masterOrSlaveLabel}</p>
-            <p>{positionLabel}</p>
-            <p>Navigate to {props.ipAddress}:8088 to configure this device in the BrightWall</p>
           </div>
         </div>
       );
