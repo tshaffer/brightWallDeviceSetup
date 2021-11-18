@@ -113,6 +113,7 @@ const App = (props: AppProps) => {
     positionLabel = 'Position in wall: unassigned';
   } else {
     positionLabel = 'Position in wall: row ' + props.rowIndex.toString() + ', column ' + props.columnIndex.toString();
+    positionLabel = String.fromCharCode(65 + props.columnIndex) + String.fromCharCode(49 + props.rowIndex);
   }
 
   console.log('brightWallDeviceSetup');
@@ -130,7 +131,7 @@ const App = (props: AppProps) => {
     case DeviceSetupScreen.ConfigureScreen:
       return (
         <div className={classes.App}>
-          <div className={classes.WallConfigVisual}>
+          <div className={classes.bodyDiv}>
             Wall Config Visual goes here
           </div>
           <div className={classes.bodyDiv}>
@@ -150,6 +151,11 @@ const App = (props: AppProps) => {
             <span className={classes.bold}>Master/Slave:</span>
             <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
             <br />
+
+            <div>
+              <span className={classes.bold}>Screen Position:</span>
+              <span>&nbsp;&nbsp;{positionLabel}</span>
+            </div>
           </div>
         </div>
       );
