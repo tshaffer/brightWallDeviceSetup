@@ -14,6 +14,7 @@ import { getBrightSignConfig } from '../controller';
 import {
   getIsBrightWall,
   getSerialNumber,
+  getMacAddress,
   getIsMaster,
   getRowIndex,
   getColumnIndex,
@@ -27,6 +28,7 @@ import { DeviceSetupScreen } from '../type';
 export interface AppProps {
   isBrightWall: boolean;
   serialNumber: string;
+  macAddress: string;
   ipAddress: string;
   activeScreen: string;
   isMaster: boolean;
@@ -78,6 +80,9 @@ const useStyles = makeStyles({
   },
   bodyDiv: {
     marginTop: '22%'
+  },
+  bold: {
+    fontWeight: 'bold',
   }
 });
 
@@ -114,6 +119,23 @@ const App = (props: AppProps) => {
             <div className={classes.logoContainerStyle} />
           </header>
           <div className={classes.bodyDiv}>
+            
+            <span className={classes.bold}>IP Address:</span>
+            <span>{' ' + props.ipAddress}:8088</span>
+            <br/>
+
+            <span className={classes.bold}>Serial Number:</span>
+            <span>&nbsp;&nbsp;{props.serialNumber}</span>
+            <br/>
+
+            <span className={classes.bold}>MAC Address:</span>
+            <span>&nbsp;&nbsp;{props.macAddress}</span>
+            <br/>
+
+            <br/>
+            <br/>
+
+
             BrightWall Device Setup
             <p>Serial Number:&nbsp;&nbsp;{props.serialNumber}</p>
             <p>{masterOrSlaveLabel}</p>
@@ -138,6 +160,7 @@ function mapStateToProps(state: any, ownProps: any): Partial<any> {
   return {
     isBrightWall: getIsBrightWall(state),
     serialNumber: getSerialNumber(state),
+    macAddress: getMacAddress(state),
     ipAddress: getIpAddress(state),
     activeScreen: getActiveScreen(state),
     isMaster: getIsMaster(state),

@@ -6,6 +6,7 @@ import { BrightSignAttributes } from '../type';
 // ------------------------------------
 export const SET_IS_BRIGHTWALL = 'SET_IS_BRIGHTWALL';
 export const SET_SERIAL_NUMBER = 'SET_SERIAL_NUMBER';
+export const SET_MAC_ADDRESS = 'SET_MAC_ADDRESS';
 export const SET_IP_ADDRESS = 'SET_IP_ADDRESS';
 
 // ------------------------------------
@@ -43,6 +44,22 @@ export const setSerialNumber = (
   };
 };
 
+export interface SetMacAddressPayload {
+  macAddress: string;
+}
+type SetMacAddressAction = BrightWallModelAction<SetMacAddressPayload>;
+
+export const setMacAddress = (
+  macAddress: string,
+): SetMacAddressAction => {
+  return {
+    type: SET_MAC_ADDRESS,
+    payload: {
+      macAddress,
+    },
+  };
+};
+
 export interface SetIpAddressPayload {
   ipAddress: string;
 }
@@ -65,6 +82,7 @@ export const setIpAddress = (
 
 const initialState: BrightSignAttributes = {
   isBrightWall: false,
+  macAddress: '',
   serialNumber: '',
   ipAddress: '',
 };
@@ -72,7 +90,7 @@ const initialState: BrightSignAttributes = {
 
 export const brightSignAttributesReducer = (
   state: BrightSignAttributes = initialState,
-  action: SetIsBrightWallAction & SetSerialNumberAction & SetIpAddressAction
+  action: SetIsBrightWallAction & SetSerialNumberAction & SetMacAddressAction & SetIpAddressAction
 ): BrightSignAttributes => {
   switch (action.type) {
     case SET_IS_BRIGHTWALL:
@@ -84,6 +102,11 @@ export const brightSignAttributesReducer = (
       return {
         ...state,
         serialNumber: action.payload.serialNumber,
+      };
+    case SET_MAC_ADDRESS:
+      return {
+        ...state,
+        macAddress: action.payload.macAddress,
       };
     case SET_IP_ADDRESS:
       return {

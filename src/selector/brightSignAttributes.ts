@@ -8,6 +8,10 @@ export const getSerialNumber = (state: BrightSignState): string => {
   return state.brightSignAttributes.serialNumber;
 };
 
+export const getMacAddress = (state: BrightSignState): string => {
+  return state.brightSignAttributes.macAddress;
+};
+
 export const getIpAddress = (state: BrightSignState): string => {
   return state.brightSignAttributes.ipAddress;
 };

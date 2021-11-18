@@ -6,6 +6,7 @@ import {
   setIpAddress,
   setIsBrightWall,
   setIsMaster,
+  setMacAddress,
   setNumColumns,
   setNumRows,
   setRowIndex,
@@ -70,13 +71,17 @@ export const getBrightSignConfig = () => {
             console.log('networkInterfaceInfo.length');
             console.log(networkInterfaceInfo.length);
             for (const networkInterface of networkInterfaceInfo) {
-              console.log('networkInterface');
+              console.log('networkInterface.mac');
+              console.log(networkInterface.mac);
+              console.log('networkInterface.address');
               console.log(networkInterface.address);
+              console.log('networkInterface.family');
               console.log(networkInterface.family);
-              // TEDTODO - this code currently only support an ethernet connection
+              // TEDTODO - this code currently only supports an ethernet connection
               if (networkInterfaceId === 'eth0' && networkInterface.family === 'IPv4') {
                 const deviceIpAddress = networkInterface.address;
                 dispatch(setIpAddress(deviceIpAddress));
+                dispatch(setMacAddress(networkInterface.mac));
               }
             }
           }
