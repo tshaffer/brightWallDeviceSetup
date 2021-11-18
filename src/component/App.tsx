@@ -47,10 +47,19 @@ const useStyles = makeStyles({
     // height: '1080px',
     height: '100%',
   },
+  WallConfigVisual: {
+    // background: linear - gradient(90deg, #753CD9, #290D5B),
+    background: 'lightGreen',
+    minHeight: '50vh',
+    color: 'orange',
+    fontFamily: "PTSans",
+    textAlign: 'center',
+  },
+
   App: {
     // background: linear - gradient(90deg, #753CD9, #290D5B),
     background: 'lightBlue',
-    minHeight: '100vh',
+    minHeight: '50vh',
     color: 'white',
     fontFamily: "PTSans",
     textAlign: 'center',
@@ -79,7 +88,7 @@ const useStyles = makeStyles({
     top: '0',
   },
   bodyDiv: {
-    marginTop: '22%'
+    marginTop: '12%'
   },
   bold: {
     fontWeight: 'bold',
@@ -113,30 +122,34 @@ const App = (props: AppProps) => {
 
   //             <p>{positionLabel}</p>
 
+  //   <header className={classes.AppHeader}>
+  //   <div className={classes.logoContainerStyle} />
+  // </header>
+
   switch (props.activeScreen) {
     case DeviceSetupScreen.ConfigureScreen:
       return (
         <div className={classes.App}>
-          <header className={classes.AppHeader}>
-            <div className={classes.logoContainerStyle} />
-          </header>
+          <div className={classes.WallConfigVisual}>
+            Wall Config Visual goes here
+          </div>
           <div className={classes.bodyDiv}>
-            
+
             <span className={classes.bold}>IP Address:</span>
             <span>{' ' + props.ipAddress}:8088</span>
-            <br/>
+            <br />
 
             <span className={classes.bold}>Serial Number:</span>
             <span>&nbsp;&nbsp;{props.serialNumber}</span>
-            <br/>
+            <br />
 
             <span className={classes.bold}>MAC Address:</span>
             <span>&nbsp;&nbsp;{props.macAddress}</span>
-            <br/>
+            <br />
 
             <span className={classes.bold}>Master/Slave:</span>
             <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
-            <br/>
+            <br />
           </div>
         </div>
       );
