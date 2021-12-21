@@ -74,11 +74,32 @@ body {
   justify-self: stretch;
 }
 
-.screenGridContainer .screenGridItemContainer:hover {
+.screenGridContainer .selectedScreenGridItemContainer {
   box-sizing: border-box;
 
   border-color: #9800FE;
   background-color: #9800FE;
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+
+  border: 2px solid black;
+  justify-self: stretch;
+}
+
+.screenGridContainer .selectedScreenGridItemContainer .indexContainer {
+  box-sizing: border-box;
+  flex-basis: auto;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  font-family: 'PTSans';
+  font-size: 16px;
 }
 
 .screenGridContainer .screenGridItemContainer .indexContainer {

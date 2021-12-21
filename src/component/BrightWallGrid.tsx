@@ -1,14 +1,22 @@
 import * as React from 'react';
-import {defaultTo, map} from 'lodash';
+import { connect } from 'react-redux';
+
+import _, { map } from 'lodash';
 
 import '../styles/deviceSetup.css';
+import {
+  getColumnIndex,
+  getNumColumns,
+  getNumRows,
+  getRowIndex
+} from '../selector';
 
 export interface BrightWallGridProps {
-  items: Array<string>,
-  numCols?: number,
+  numRows: number,
+  numColumns: number,
+  rowIndex: number;
+  columnIndex: number;
 }
-
-const BEZEL_GRID_DEFAULT_NUMBER_OF_COLUMNS: number = 8;
 
 // -----------------------------------------------------------------------
 // Component
@@ -16,25 +24,64 @@ const BEZEL_GRID_DEFAULT_NUMBER_OF_COLUMNS: number = 8;
 
 const BrightWallGrid = (props: BrightWallGridProps) => {
 
-  const items: Array<string> = defaultTo(props.items, []);
-  const numCols: number = defaultTo(props.numCols, BEZEL_GRID_DEFAULT_NUMBER_OF_COLUMNS);
-
   const style = {
-      gridTemplateColumns: `repeat(${numCols}, 1fr)`
+    gridTemplateColumns: `repeat(${props.numColumns}, 1fr)`
   };
 
-return (
+  const getLabel = (rowIndex: number, columnIndex: number) => {
+    const positionLabel = String.fromCharCode(65 + columnIndex) + String.fromCharCode(49 + rowIndex);
+    return positionLabel;
+  }
+
+  const getLabels = () => {
+    const items: string[] = [];
+    for (let rowIndex = 0; rowIndex < props.numRows; rowIndex++) {
+      for (let columnIndex = 0; columnIndex < props.numColumns; columnIndex++) {
+        items.push(getLabel(rowIndex, columnIndex));
+      }
+    }
+    return items;
+  }
+
+  const labels: string[] = getLabels();
+  // TEDTODOBW - device may have no position yet.
+  const devicePosition: string = getLabel(props.rowIndex + 1, props.columnIndex + 1);
+
+  return (
     <div className='screenGridContainer' style={style}>
-        {map(items, (item: string) => {
-            return (
-                <div className='screenGridItemContainer' key={`bezel_${item}`}>
-                    <div className='indexContainer'>{item}</div>
-                </div>
-            );
-        })}
+      {map(labels, (item: string) => {
+
+        console.log('item: ' + item);
+        console.log('devicePosition: ' + devicePosition);
+        if (devicePosition === item) {
+          console.log('match');
+        }
+        else {
+          console.log('no match');
+        }
+        let className = 'screenGridItemContainer';
+        if (item === devicePosition) {
+          className = 'selectedScreenGridItemContainer';
+        }
+        return (
+          <div className={className} key={`position_${item}`}>
+            <div className='indexContainer'>{item}</div>
+          </div>
+        );
+      })}
     </div>
-);
+  );
 };
 
-export default BrightWallGrid;
+function mapStateToProps(state: any): Partial<any> {
+  return {
+    numRows: getNumRows(state),
+    numColumns: getNumColumns(state),
+    rowIndex: getRowIndex(state),
+    columnIndex: getColumnIndex(state),
+  };
+}
+
+export default connect(mapStateToProps)(BrightWallGrid);
+
 

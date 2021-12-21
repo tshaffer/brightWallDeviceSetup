@@ -14,25 +14,6 @@ import ScreenPosition from './ScreenPosition';
 
 const BrightWallDeviceSetup = () => {
 
-  const gridItems: Array<string> = [
-    'A1',
-    'B1',
-    'C1',
-    'D1',
-    'E1',
-    'F1',
-    'G1',
-    'H1',
-    'A2',
-    'B2',
-    'C2',
-    'D2',
-    'E2',
-    'F2',
-    'G2',
-    'H2',
-  ]
-
   return (
     <div className='screenInfoContainer'>
       <div className='screenTopPaddingContainer'>
@@ -41,9 +22,7 @@ const BrightWallDeviceSetup = () => {
       <div className='screenTopLeftPaddingContainer'>
       </div>
 
-      <BrightWallGrid
-        items={gridItems}
-      />
+      <BrightWallGrid />
 
       <div className='screenTopRightPaddingContainer'>
       </div>
