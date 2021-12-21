@@ -1,9 +1,18 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
 import '../styles/deviceSetup.css';
 
+import {
+  getColumnIndex,
+  getRowIndex
+} from '../selector';
+
+import { getDevicePositionLabel } from '../utility';
+
 export interface ScreenPositionProps {
-  position: string,
+  rowIndex: number;
+  columnIndex: number;
 }
 
 // -----------------------------------------------------------------------
@@ -11,13 +20,23 @@ export interface ScreenPositionProps {
 // -----------------------------------------------------------------------
 
 const ScreenPosition = (props: ScreenPositionProps) => {
+
+  const devicePosition: string = getDevicePositionLabel(props.rowIndex, props.columnIndex);
+
   return (
     <div className='screenPositionInfoContainer'>
-        <div className='screenNameLabel'>Screen Position:</div>
-        <div className='screenNameValue'>{props.position}</div>
+      <div className='screenNameLabel'>Screen Position:</div>
+      <div className='screenNameValue'>{devicePosition}</div>
     </div>
-);
+  );
 };
 
-export default ScreenPosition;
+function mapStateToProps(state: any): Partial<any> {
+  return {
+    rowIndex: getRowIndex(state),
+    columnIndex: getColumnIndex(state),
+  };
+}
+
+export default connect(mapStateToProps)(ScreenPosition);
 
