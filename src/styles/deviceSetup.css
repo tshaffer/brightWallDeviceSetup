@@ -1,13 +1,3 @@
-/* @font-face {
-  font-family: 'Balsamiq Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.woff2') format('woff2'),
-  url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.woff') format('woff'),
-  url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.ttf')  format('truetype');
-} */
-
 html {
   width: 100%;
   height: 100%;
@@ -98,7 +88,7 @@ body {
   flex-grow: 0;
   flex-shrink: 0;
 
-  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'PTSans';
   font-size: 16px;
 }
 
@@ -130,7 +120,7 @@ body {
   box-sizing: border-box;
   display: inline-block;
 
-  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'PTSans';
   font-size: 20px;
 }
 
@@ -140,7 +130,7 @@ body {
 
   padding-left: 15px;
 
-  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'PTSans';
   font-size: 18px;
 }
 
@@ -151,7 +141,7 @@ body {
 
   align-self: center;
 
-  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'PTSans';
   font-size: 50px;
 }
 
@@ -161,7 +151,7 @@ body {
 
   vertical-align: middle;
 
-  /* font-family: 'Balsamiq Sans', cursive; */
+  font-family: 'PTSans';
   font-size: 18px;
 }
 
@@ -173,21 +163,21 @@ body {
 
   vertical-align: middle;
 
-  /* font-family: 'Balsamiq Sans', cursive; */
+  font-family: 'PTSans';
   font-size: 50px;
 }
 
 
 .App {
   background: lightblue;
-  min-height: 50vh;
+  min-height: 100%;
   color: white;
   font-family: 'PTSans';
   text-align: center;
 }
 
 .bodyDiv {
-  margin-top: 12%
+  margin-top: 0;
 }
 
 .bold {
