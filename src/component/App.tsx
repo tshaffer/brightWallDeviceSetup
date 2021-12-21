@@ -26,6 +26,7 @@ import {
   getIpAddress,
 } from '../selector';
 import { DeviceSetupScreen } from '../type';
+import BrightWallDeviceSetup from './BrightWallDeviceSetup';
 
 /** @internal */
 /** @private */
@@ -80,47 +81,50 @@ const App = (props: AppProps) => {
 
   console.log('take 1');
 
-  switch (props.activeScreen) {
-    case DeviceSetupScreen.ConfigureScreen:
-      return (
-        <div className='App'>
-          <div className='bodyDiv'>
-            Wall Config Visual goes here - update
-          </div>
-          <div className='bodyDiv'>
+  return (
+    <BrightWallDeviceSetup/>
+  )
+  // switch (props.activeScreen) {
+  //   case DeviceSetupScreen.ConfigureScreen:
+  //     return (
+  //       <div className='App'>
+  //         <div className='bodyDiv'>
+  //           Wall Config Visual goes here - update
+  //         </div>
+  //         <div className='bodyDiv'>
 
-            <span className='bold'>IP Address:</span>
-            <span>{' ' + props.ipAddress}:8088</span>
-            <br />
+  //           <span className='bold'>IP Address:</span>
+  //           <span>{' ' + props.ipAddress}:8088</span>
+  //           <br />
 
-            <span className='bold'>Serial Number:</span>
-            <span>&nbsp;&nbsp;{props.serialNumber}</span>
-            <br />
+  //           <span className='bold'>Serial Number:</span>
+  //           <span>&nbsp;&nbsp;{props.serialNumber}</span>
+  //           <br />
 
-            <span className='bold'>MAC Address:</span>
-            <span>&nbsp;&nbsp;{props.macAddress}</span>
-            <br />
+  //           <span className='bold'>MAC Address:</span>
+  //           <span>&nbsp;&nbsp;{props.macAddress}</span>
+  //           <br />
 
-            <span className='bold'>Master/Slave:</span>
-            <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
-            <br />
+  //           <span className='bold'>Master/Slave:</span>
+  //           <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
+  //           <br />
 
-            <div>
-              <span className='bold'>Screen Position:</span>
-              <span>&nbsp;&nbsp;{positionLabel}</span>
-            </div>
-          </div>
-        </div>
-      );
-    case DeviceSetupScreen.AlignScreen:
-      return (
-        <div>
-          <AlignmentPattern />
-        </div>
-      );
-    default:
-      return null;
-  }
+  //           <div>
+  //             <span className='bold'>Screen Position:</span>
+  //             <span>&nbsp;&nbsp;{positionLabel}</span>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   case DeviceSetupScreen.AlignScreen:
+  //     return (
+  //       <div>
+  //         <AlignmentPattern />
+  //       </div>
+  //     );
+  //   default:
+  //     return null;
+  // }
 
 };
 
