@@ -4,7 +4,11 @@ import { bindActionCreators } from 'redux';
 
 import AlignmentPattern from './AlignmentPattern';
 
-import { makeStyles } from '@material-ui/core/styles';
+console.log('before import');
+import '../styles/deviceSetup.css';
+console.log('after import');
+
+// import { makeStyles } from '@material-ui/core/styles';
 // import {
 //   serialNumber,
 //   videoWallRowIndex,
@@ -41,65 +45,20 @@ export interface AppProps {
 // Component
 // -----------------------------------------------------------------------
 
-const useStyles = makeStyles({
-  parentDiv: {
-    position: 'relative',
-    // height: '1080px',
-    height: '100%',
-  },
-  WallConfigVisual: {
-    // background: linear - gradient(90deg, #753CD9, #290D5B),
-    background: 'lightGreen',
-    minHeight: '50vh',
-    color: 'orange',
-    fontFamily: "PTSans",
-    textAlign: 'center',
-  },
-
-  App: {
-    // background: linear - gradient(90deg, #753CD9, #290D5B),
-    background: 'lightBlue',
-    minHeight: '50vh',
-    color: 'white',
-    fontFamily: "PTSans",
-    textAlign: 'center',
-  },
-  AppHeader: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-  },
-  logoContainerStyle: {
-    height: '346px',
-    width: '1603px',
-    margin: '100px 10px 5px 10px',
-    position: 'absolute',
-    // background: url('BrightSign_logo_white.png') no-repeat 50% 80%',
-    backgroundSize: '400px',
-  },
-  vl: {
-    borderLeft: '6px solid green',
-    height: '500px',
-    position: 'absolute',
-    left: '50%',
-    marginLeft: '-3px',
-    top: '0',
-  },
-  bodyDiv: {
-    marginTop: '12%'
-  },
-  bold: {
-    fontWeight: 'bold',
-  }
-});
+// const useStyles = makeStyles({
+//   bodyDiv: {
+//     marginTop: '12%'
+//   },
+//   bold: {
+//     fontWeight: 'bold',
+//   }
+// });
 
 const App = (props: AppProps) => {
 
   // const [_setupScreen, _setSetupScreen] = React.useState('configureScreen');
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   // Equivalent to old componentDidMount
   React.useEffect(props.onGetBrightSignConfig, []);
@@ -121,39 +80,33 @@ const App = (props: AppProps) => {
 
   console.log('take 1');
 
-  //             <p>{positionLabel}</p>
-
-  //   <header className={classes.AppHeader}>
-  //   <div className={classes.logoContainerStyle} />
-  // </header>
-
   switch (props.activeScreen) {
     case DeviceSetupScreen.ConfigureScreen:
       return (
-        <div className={classes.App}>
-          <div className={classes.bodyDiv}>
-            Wall Config Visual goes here
+        <div className='App'>
+          <div className='bodyDiv'>
+            Wall Config Visual goes here - update
           </div>
-          <div className={classes.bodyDiv}>
+          <div className='bodyDiv'>
 
-            <span className={classes.bold}>IP Address:</span>
+            <span className='bold'>IP Address:</span>
             <span>{' ' + props.ipAddress}:8088</span>
             <br />
 
-            <span className={classes.bold}>Serial Number:</span>
+            <span className='bold'>Serial Number:</span>
             <span>&nbsp;&nbsp;{props.serialNumber}</span>
             <br />
 
-            <span className={classes.bold}>MAC Address:</span>
+            <span className='bold'>MAC Address:</span>
             <span>&nbsp;&nbsp;{props.macAddress}</span>
             <br />
 
-            <span className={classes.bold}>Master/Slave:</span>
+            <span className='bold'>Master/Slave:</span>
             <span>&nbsp;&nbsp;{masterOrSlaveLabel}</span>
             <br />
 
             <div>
-              <span className={classes.bold}>Screen Position:</span>
+              <span className='bold'>Screen Position:</span>
               <span>&nbsp;&nbsp;{positionLabel}</span>
             </div>
           </div>

@@ -1,0 +1,195 @@
+/* @font-face {
+  font-family: 'Balsamiq Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.woff2') format('woff2'),
+  url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.woff') format('woff'),
+  url('/src/fonts/balsamiqSans/BalsamiqSans-Regular.ttf')  format('truetype');
+} */
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+
+  background: orange;
+
+}
+
+.screenInfoContainer {
+  box-sizing: border-box;
+  display: grid;
+
+  height: 100%;
+
+  padding: 30px 50px 30px 50px;
+
+  grid-template-columns: minmax(auto, 12%) repeat(3, 1fr) minmax(auto, 12%);
+  grid-template-rows: 8% minmax(auto, 60%) min-content;
+
+  grid-gap: 0px 0px;
+
+  grid-template-areas:
+                    "tp tp tp tp tp"
+                    "lp sg sg sg rp"
+                    "di di sp sp rp";
+}
+
+.screenTopPaddingContainer {
+  grid-area: tp;
+}
+
+.screenTopLeftPaddingContainer {
+  grid-area: lp;
+}
+
+.screenTopRightPaddingContainer {
+  grid-area: rp;
+}
+
+.screenGridContainer {
+  box-sizing: border-box;
+  display: grid;
+
+  margin: 0px;
+  padding: 0px 0px 50px 0px;
+
+  grid-area: sg;
+
+  grid-auto-rows: 1fr;
+
+  grid-gap: 1px 1px;
+}
+
+.screenGridContainer .screenGridItemContainer {
+  box-sizing: border-box;
+  display: flex;
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  justify-content: space-around;
+  align-items: center;
+  align-content: flex-start;
+
+  border: 2px solid black;
+  justify-self: stretch;
+}
+
+.screenGridContainer .screenGridItemContainer:hover {
+  box-sizing: border-box;
+
+  border-color: #9800FE;
+  background-color: #9800FE;
+}
+
+.screenGridContainer .screenGridItemContainer .indexContainer {
+  box-sizing: border-box;
+  flex-basis: auto;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 16px;
+}
+
+.screenInfoContainer .deviceInfoContainer {
+  box-sizing: border-box;
+  display: flex;
+  
+  grid-area: di;
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.screenInfoContainer .deviceInfoContainer .deviceInfoRow {
+  box-sizing: border-box;
+
+  padding-top: 20px;
+}
+
+.screenInfoContainer .deviceInfoContainer .deviceInfoRow:first-child {
+  padding-top: 0px;
+}
+
+.screenInfoContainer .deviceInfoContainer .deviceInfoRow .deviceInfoLabel {
+  box-sizing: border-box;
+  display: inline-block;
+
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 20px;
+}
+
+.screenInfoContainer .deviceInfoContainer .deviceInfoRow .deviceInfoValue {
+  box-sizing: border-box;
+  display: inline-block;
+
+  padding-left: 15px;
+
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 18px;
+}
+
+.screenInfoContainer .screenPositionInfoContainer {
+  box-sizing: border-box;
+
+  grid-area: sp;
+
+  align-self: center;
+
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: 50px;
+}
+
+.screenInfoContainer .screenPositionInfoContainer .screenNameLabel {
+  box-sizing: border-box;
+  display: inline-block;
+
+  vertical-align: middle;
+
+  /* font-family: 'Balsamiq Sans', cursive; */
+  font-size: 18px;
+}
+
+.screenInfoContainer .screenPositionInfoContainer .screenNameValue {
+  box-sizing: border-box;
+  display: inline-block;
+
+  padding-left: 100px;
+
+  vertical-align: middle;
+
+  /* font-family: 'Balsamiq Sans', cursive; */
+  font-size: 50px;
+}
+
+
+.App {
+  background: lightblue;
+  min-height: 50vh;
+  color: white;
+  font-family: 'PTSans';
+  text-align: center;
+}
+
+.bodyDiv {
+  margin-top: 12%
+}
+
+.bold {
+  font-weight: bold
+}
