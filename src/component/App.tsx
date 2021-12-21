@@ -8,7 +8,6 @@ console.log('before import');
 import '../styles/deviceSetup.css';
 console.log('after import');
 
-// import { makeStyles } from '@material-ui/core/styles';
 // import {
 //   serialNumber,
 //   videoWallRowIndex,
@@ -46,20 +45,10 @@ export interface AppProps {
 // Component
 // -----------------------------------------------------------------------
 
-// const useStyles = makeStyles({
-//   bodyDiv: {
-//     marginTop: '12%'
-//   },
-//   bold: {
-//     fontWeight: 'bold',
-//   }
-// });
-
 const App = (props: AppProps) => {
 
   // const [_setupScreen, _setSetupScreen] = React.useState('configureScreen');
 
-  // const classes = useStyles();
 
   // Equivalent to old componentDidMount
   React.useEffect(props.onGetBrightSignConfig, []);
@@ -81,9 +70,21 @@ const App = (props: AppProps) => {
 
   console.log('take 1');
 
-  return (
-    <BrightWallDeviceSetup/>
-  )
+  switch (props.activeScreen) {
+    case DeviceSetupScreen.ConfigureScreen:
+      return (
+        <BrightWallDeviceSetup />
+      );
+    case DeviceSetupScreen.AlignScreen:
+      return (
+        <div>
+          <AlignmentPattern />
+        </div>
+      );
+    default:
+      return null;
+  }
+
   // switch (props.activeScreen) {
   //   case DeviceSetupScreen.ConfigureScreen:
   //     return (

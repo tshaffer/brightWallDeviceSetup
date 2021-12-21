@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import '../styles/deviceSetup.css';
 import BrightWallGrid from './BrightWallGrid';
@@ -46,12 +48,7 @@ const BrightWallDeviceSetup = () => {
       <div className='screenTopRightPaddingContainer'>
       </div>
 
-      <DeviceInfo
-        ipAddress='127.0.0.1'
-        serialNumber='ABC123XYZ'
-        macAddress='00:00:00:00:00:00'
-        master='None'
-      />
+      <DeviceInfo />
 
       <ScreenPosition
         position='B2'
@@ -61,5 +58,15 @@ const BrightWallDeviceSetup = () => {
   );
 };
 
-export default BrightWallDeviceSetup;
+function mapStateToProps(state: any, ownProps: any): Partial<any> {
+  return {
+  };
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators({
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BrightWallDeviceSetup);
 
