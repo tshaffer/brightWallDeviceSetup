@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import _, { map } from 'lodash';
+import { map } from 'lodash';
 
 import '../styles/deviceSetup.css';
 import {
@@ -10,6 +10,7 @@ import {
   getNumRows,
   getRowIndex
 } from '../selector';
+import { getDevicePositionLabel } from '../utility';
 
 export interface BrightWallGridProps {
   numRows: number,
@@ -28,24 +29,18 @@ const BrightWallGrid = (props: BrightWallGridProps) => {
     gridTemplateColumns: `repeat(${props.numColumns}, 1fr)`
   };
 
-  const getLabel = (rowIndex: number, columnIndex: number) => {
-    const positionLabel = String.fromCharCode(65 + columnIndex) + String.fromCharCode(49 + rowIndex);
-    return positionLabel;
-  }
-
   const getLabels = () => {
     const items: string[] = [];
     for (let rowIndex = 0; rowIndex < props.numRows; rowIndex++) {
       for (let columnIndex = 0; columnIndex < props.numColumns; columnIndex++) {
-        items.push(getLabel(rowIndex, columnIndex));
+        items.push(getDevicePositionLabel(rowIndex, columnIndex));
       }
     }
     return items;
   }
 
   const labels: string[] = getLabels();
-  // TEDTODOBW - device may have no position yet.
-  const devicePosition: string = getLabel(props.rowIndex + 1, props.columnIndex + 1);
+  const devicePosition: string = getDevicePositionLabel(props.rowIndex, props.columnIndex);
 
   return (
     <div className='screenGridContainer' style={style}>

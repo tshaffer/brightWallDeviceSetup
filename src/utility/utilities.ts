@@ -19,3 +19,11 @@ export const tryConvertNumberStringToBool = (val: string, defaultValue: boolean)
   }
   return defaultValue;
 }
+
+export const getDevicePositionLabel = (rowIndex: number, columnIndex: number): string => {
+  if (rowIndex < 0 || columnIndex < 0) {
+    return 'Unassigned';
+  } else {
+    return String.fromCharCode(65 + columnIndex) + String.fromCharCode(49 + rowIndex);
+  }
+}
