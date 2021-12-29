@@ -3,6 +3,7 @@ import * as React from 'react';
 import '../styles/deviceSetup.css';
 
 import BrightWallGrid from './BrightWallGrid';
+
 import DeviceInfo from './DeviceInfo';
 import ScreenPosition from './ScreenPosition';
 

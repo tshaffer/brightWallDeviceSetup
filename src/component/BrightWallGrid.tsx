@@ -68,7 +68,7 @@ const BrightWallGrid = (props: BrightWallGridProps) => {
   );
 };
 
-function mapStateToProps(state: any): Partial<any> {
+function mapStateToProps(state: any): Partial<BrightWallGridProps> {
   return {
     numRows: getNumRows(state),
     numColumns: getNumColumns(state),

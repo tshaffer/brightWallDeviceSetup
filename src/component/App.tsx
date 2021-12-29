@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import AlignmentPattern from './AlignmentPattern';
+// import AlignmentPattern from './AlignmentPattern';
+import AlignmentScreen from './AlignmentScreen';
 
 console.log('before import');
 import '../styles/deviceSetup.css';
@@ -78,7 +79,7 @@ const App = (props: AppProps) => {
     case DeviceSetupScreen.AlignScreen:
       return (
         <div>
-          <AlignmentPattern />
+          <AlignmentScreen />
         </div>
       );
     default:

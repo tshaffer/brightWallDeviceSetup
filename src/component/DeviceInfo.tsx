@@ -50,7 +50,7 @@ const DeviceInfo = (props: DeviceInfoProps) => {
   );
 };
 
-function mapStateToProps(state: any): Partial<any> {
+function mapStateToProps(state: any): Partial<DeviceInfoProps> {
   return {
     serialNumber: getSerialNumber(state),
     macAddress: getMacAddress(state),

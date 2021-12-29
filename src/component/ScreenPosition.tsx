@@ -31,7 +31,7 @@ const ScreenPosition = (props: ScreenPositionProps) => {
   );
 };
 
-function mapStateToProps(state: any): Partial<any> {
+function mapStateToProps(state: any): Partial<ScreenPositionProps> {
   return {
     rowIndex: getRowIndex(state),
     columnIndex: getColumnIndex(state),
