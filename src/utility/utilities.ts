@@ -1,3 +1,5 @@
+import { isNumber } from "lodash";
+
 export const tryConvertStringToNumber = (val: string, defaultValue: number): number => {
   const num: number = Number(val);
   if (!isNaN(num)) {
@@ -21,6 +23,14 @@ export const tryConvertNumberStringToBool = (val: string, defaultValue: boolean)
 }
 
 export const getDevicePositionLabel = (rowIndex: number, columnIndex: number): string => {
+
+  if (!isNumber(rowIndex)) {
+    rowIndex = tryConvertStringToNumber(rowIndex, -1);
+  }
+  if (!isNumber(columnIndex)) {
+    columnIndex = tryConvertStringToNumber(columnIndex, -1);
+  }
+
   if (rowIndex < 0 || columnIndex < 0) {
     return 'Unassigned';
   } else {
