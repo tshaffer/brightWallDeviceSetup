@@ -7,9 +7,6 @@ import { Provider } from 'react-redux';
 
 import { brightWallModelReducer, setColumnIndex, setRowIndex } from './model';
 
-import {
-  getPlatform,
-} from './config';
 import App from './component/App';
 import { isNil } from 'lodash';
 
@@ -56,10 +53,6 @@ bsMessage.onbsmessage = (msg: any) => {
         break;
     }
   }
-  // for(name in msg.data)
-  // {
-  //     console.log('### ' + name + ': ' + msg.data[name]);
-  // }
 }
 
 
