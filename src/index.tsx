@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { brightWallModelReducer, setColumnIndex, setRowIndex } from './model';
+import { brightWallModelReducer, setColumnIndex, setIsMaster, setRowIndex } from './model';
 
 import App from './component/App';
 import { isNil } from 'lodash';
@@ -42,9 +42,18 @@ bsMessage.onbsmessage = (msg: any) => {
           const columnIndex: number = msg.data['columnindex'];
           console.log('columnIndex');
           console.log(columnIndex);
-          
+
           store.dispatch(setRowIndex(rowIndex));
           store.dispatch(setColumnIndex(columnIndex));
+        }
+        break;
+      case 'setBrightWallIsMaster':
+        if (msg.data.hasOwnProperty('ismaster')) {
+          const isMaster: boolean = msg.data['ismaster'];
+          console.log('isMaster');
+          console.log(isMaster);
+
+          store.dispatch(setIsMaster(isMaster));
         }
         break;
       default:
