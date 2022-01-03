@@ -9,6 +9,7 @@ import { brightWallModelReducer, setColumnIndex, setIsMaster, setRowIndex } from
 
 import App from './component/App';
 import { isNil } from 'lodash';
+import { isString } from 'lodash';
 
 // const platform = getPlatform();
 // console.log(platform);
@@ -53,7 +54,14 @@ bsMessage.onbsmessage = (msg: any) => {
           console.log('isMaster');
           console.log(isMaster);
 
-          store.dispatch(setIsMaster(isMaster));
+          // TEDTODOBW
+          let isMasterParam: boolean;
+          if (isString(isMaster)) {
+            isMasterParam = (isMaster as string).toLowerCase() === '1';
+          } else {
+            isMasterParam = isMaster;
+          }
+          store.dispatch(setIsMaster(isMasterParam));
         }
         break;
       default:
