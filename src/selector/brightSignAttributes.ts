@@ -4,6 +4,10 @@ export const getIsBrightWall = (state: BrightSignState): boolean => {
   return state.brightSignAttributes.isBrightWall;
 };
 
+export const getActivePresentationName = (state: BrightSignState): string => {
+  return state.brightSignAttributes.activePresentationName;
+};
+
 export const getSerialNumber = (state: BrightSignState): string => {
   return state.brightSignAttributes.serialNumber;
 };

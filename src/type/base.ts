@@ -18,6 +18,7 @@ export interface AppAttributes {
 
 export interface BrightSignAttributes {
   isBrightWall: boolean;
+  activePresentationName: string;
   serialNumber: string;
   macAddress: string;
   ipAddress: string;

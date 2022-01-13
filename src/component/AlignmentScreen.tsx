@@ -37,6 +37,6 @@ const AlignmentScreen = () => {
       <line x1="0" y1="500" x2="0" y2="500" stroke="black" />
     </svg>
   );
-}
+};
 
 export default AlignmentScreen;

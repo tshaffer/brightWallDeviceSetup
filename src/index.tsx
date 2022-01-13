@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { brightWallModelReducer, setColumnIndex, setIsMaster, setRowIndex } from './model';
+import { brightWallModelReducer, setActivePresentationName, setColumnIndex, setIsMaster, setRowIndex } from './model';
 
 import App from './component/App';
 import { isNil } from 'lodash';
@@ -62,6 +62,14 @@ bsMessage.onbsmessage = (msg: any) => {
             isMasterParam = isMaster;
           }
           store.dispatch(setIsMaster(isMasterParam));
+        }
+        break;
+      case 'setActivePresentationName':
+        if (msg.data.hasOwnProperty('data')) {
+          const activePresentationName: string = msg.data['data'];
+          console.log('activePresentationName');
+          console.log(activePresentationName);
+          store.dispatch(setActivePresentationName(activePresentationName));
         }
         break;
       default:

@@ -8,9 +8,9 @@ body {
   height: 100%;
 
   margin: 0px;
-  padding: 12px;
+  /* padding: 12px; */
 
-  background: orange;
+  /* background: orange; */
 
 }
 
@@ -23,14 +23,27 @@ body {
   padding: 30px 50px 30px 50px;
 
   grid-template-columns: minmax(auto, 12%) repeat(3, 1fr) minmax(auto, 12%);
-  grid-template-rows: 8% minmax(auto, 60%) min-content;
+  /* grid-template-rows: 8% minmax(auto, 60%) min-content; */
+  grid-template-rows: min-content auto min-content;
 
   grid-gap: 0px 0px;
 
   grid-template-areas:
-                    "tp tp tp tp tp"
+                    "pn pn pn pn pn"
                     "lp sg sg sg rp"
                     "di di sp sp rp";
+}
+
+.presentationName {
+  box-sizing: border-box;
+
+  grid-area: pn;
+
+  justify-self: center;
+  align-self: center;
+
+  font-family: 'PTSans';
+  font-size: 16px;
 }
 
 .screenTopPaddingContainer {

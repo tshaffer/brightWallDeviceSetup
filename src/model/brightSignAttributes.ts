@@ -5,6 +5,7 @@ import { BrightSignAttributes } from '../type';
 // Constants
 // ------------------------------------
 export const SET_IS_BRIGHTWALL = 'SET_IS_BRIGHTWALL';
+export const SET_ACTIVE_PRESENTATION_NAME = 'SET_ACTIVE_PRESENTATION_NAME';
 export const SET_SERIAL_NUMBER = 'SET_SERIAL_NUMBER';
 export const SET_MAC_ADDRESS = 'SET_MAC_ADDRESS';
 export const SET_IP_ADDRESS = 'SET_IP_ADDRESS';
@@ -27,6 +28,23 @@ export const setIsBrightWall = (
     },
   };
 };
+
+export interface SetActivePresentationNamePayload {
+  activePresentationName: string;
+}
+type SetActivePresentationNameAction = BrightWallModelAction<SetActivePresentationNamePayload>;
+
+export const setActivePresentationName = (
+  activePresentationName: string,
+): SetActivePresentationNameAction => {
+  return {
+    type: SET_ACTIVE_PRESENTATION_NAME,
+    payload: {
+      activePresentationName,
+    },
+  };
+};
+
 
 export interface SetSerialNumberPayload {
   serialNumber: string;
@@ -85,12 +103,13 @@ const initialState: BrightSignAttributes = {
   macAddress: '',
   serialNumber: '',
   ipAddress: '',
+  activePresentationName: '',
 };
 
 
 export const brightSignAttributesReducer = (
   state: BrightSignAttributes = initialState,
-  action: SetIsBrightWallAction & SetSerialNumberAction & SetMacAddressAction & SetIpAddressAction
+  action: SetIsBrightWallAction & SetSerialNumberAction & SetMacAddressAction & SetIpAddressAction & SetActivePresentationNameAction
 ): BrightSignAttributes => {
   switch (action.type) {
     case SET_IS_BRIGHTWALL:
@@ -98,7 +117,12 @@ export const brightSignAttributesReducer = (
         ...state,
         isBrightWall: action.payload.isBrightWall,
       };
-    case SET_SERIAL_NUMBER:
+    case SET_ACTIVE_PRESENTATION_NAME:
+      return {
+        ...state,
+        activePresentationName: action.payload.activePresentationName,
+      }
+      case SET_SERIAL_NUMBER:
       return {
         ...state,
         serialNumber: action.payload.serialNumber,
