@@ -16,7 +16,6 @@ import {
 import { setPlatform } from '../model/appAttributes';
 import {
   tryConvertStringToNumber,
-  tryConvertNumberStringToBool,
 } from '../utility';
 
 import Registry from '@brightsign/registry';
@@ -34,50 +33,13 @@ const networkConfigEth = new NetworkConfigClass("eth0");
 export const getBrightSignConfig = () => {
   return ((dispatch: any): any => {
     try {
-
-      console.log('getBrightSignConfig invoked');
-
-      /*
-{ 1225.581} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61657]: getBrightSignConfig invoked
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61662]: networkInterfaceId
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61663]: lo
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61665]: networkInterfaceInfo.length
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61666]: 2
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: 127.0.0.1
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv4
-{ 1225.652} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: ::1
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv6
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61662]: networkInterfaceId
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61663]: eth0
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61665]: networkInterfaceInfo.length
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61666]: 2
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: 192.168.86.37
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv4
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61669]: networkInterface
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61670]: fe80::92ac:3fff:fe10:16
-{ 1225.653} [INFO]   [source file:///pool1:/brightWallDeviceSetupSite/build/bundle.js:61671]: IPv6
-      */
-
       const networkInterfaces = os.networkInterfaces();
       for (const networkInterfaceId in networkInterfaces) {
         if (Object.prototype.hasOwnProperty.call(networkInterfaces, networkInterfaceId)) {
           const networkInterfaceInfo = networkInterfaces[networkInterfaceId];
-          console.log('networkInterfaceId');
-          console.log(networkInterfaceId);
           if (isArray(networkInterfaceInfo)) {
-            console.log('networkInterfaceInfo.length');
-            console.log(networkInterfaceInfo.length);
             for (const networkInterface of networkInterfaceInfo) {
-              console.log('networkInterface.mac');
-              console.log(networkInterface.mac);
-              console.log('networkInterface.address');
-              console.log(networkInterface.address);
-              console.log('networkInterface.family');
-              console.log(networkInterface.family);
-              // TEDTODO - this code currently only supports an ethernet connection
+              // TEDTODOBW - this code currently only supports an ethernet connection
               if (networkInterfaceId === 'eth0' && networkInterface.family === 'IPv4') {
                 const deviceIpAddress = networkInterface.address;
                 dispatch(setIpAddress(deviceIpAddress));
@@ -87,17 +49,7 @@ export const getBrightSignConfig = () => {
           }
         }
       }
-      // const vmPromise = videoConfig.getActiveMode();
-      // vmPromise.then( (mode: any) => {
-      //   console.log('mode');
-      //   console.log(mode);
-      //   console.log(mode.modeName);
-      //   console.log(mode.width);
-      //   console.log(mode.height);
-      //   console.log(mode.graphicsPlaneWidth);
-      //   console.log(mode.graphicsPlaneHeight);
-      // })
-  
+
       // irReceiver = new BSIRReceiver('IR-in', 'NEC');
       const BSDeviceInfo = require('BSDeviceInfo');
       const deviceInfo = new BSDeviceInfo();
