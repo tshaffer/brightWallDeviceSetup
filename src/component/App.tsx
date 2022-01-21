@@ -8,7 +8,7 @@ import '../styles/deviceSetup.css';
 
 import { DeviceSetupScreen } from '../type';
 import { getBrightSignConfig } from '../controller';
-import { getActiveScreen } from '../selector';
+import { getBrightWallDeviceSetupActiveScreen } from '../selector';
 
 import BrightWallDeviceSetup from './BrightWallDeviceSetup';
 
@@ -48,7 +48,7 @@ const App = (props: AppProps) => {
 
 function mapStateToProps(state: any): Partial<AppProps> {
   return {
-    activeScreen: getActiveScreen(state),
+    activeScreen: getBrightWallDeviceSetupActiveScreen(state),
   };
 }
 

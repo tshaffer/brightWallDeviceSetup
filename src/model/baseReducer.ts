@@ -3,14 +3,13 @@
 import {
   combineReducers
 } from 'redux';
-import { BrightSignState } from '../type';
-import { appAttributesReducer } from './appAttributes';
+import { BrightSignConfig } from '../type';
 import { 
   brightSignAttributesReducer, 
  } from './brightSignAttributes';
  import { 
-  brightWallConfigurationReducer
- } from './brightWallConfiguration';
+  brightWallAttributesReducer
+ } from './brightWallAttributes';
 // -----------------------------------------------------------------------
 // Defaults
 // -----------------------------------------------------------------------
@@ -20,10 +19,9 @@ import {
 // -----------------------------------------------------------------------
 // Reducers
 // -----------------------------------------------------------------------
-export const brightWallModelReducer = combineReducers<BrightSignState>({
-  appAttributes: appAttributesReducer,
+export const brightWallModelReducer = combineReducers<BrightSignConfig>({
   brightSignAttributes: brightSignAttributesReducer,
-  brightWallConfiguration: brightWallConfigurationReducer,
+  brightWallAttributes: brightWallAttributesReducer,
 });
 
 // -----------------------------------------------------------------------

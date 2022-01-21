@@ -1,7 +1,7 @@
 // import os from 'os';
 import * as os from 'os';
 import {
-  setBrightWallDeviceSetupActiveScreen,
+  setActiveSetupScreen,
   setColumnIndex,
   setIpAddress,
   setIsBrightWall,
@@ -13,7 +13,6 @@ import {
   setScreenDimensions,
   setSerialNumber
 } from '../model';
-import { setPlatform } from '../model/appAttributes';
 import {
   tryConvertStringToNumber,
 } from '../utility';
@@ -21,6 +20,7 @@ import {
 import Registry from '@brightsign/registry';
 import { isArray, isString } from 'lodash';
 import { NetworkInterfaceConfig } from '@brightsign/networkconfiguration';
+import { DeviceSetupScreen } from '..';
 
 // export let irReceiver: BSIRReceiver;
 
@@ -93,7 +93,7 @@ export const getBrightSignConfig = () => {
           }
           dispatch(setIsMaster(isMaster));
 
-          dispatch(setBrightWallDeviceSetupActiveScreen(registryValues[6] as string));
+          dispatch(setActiveSetupScreen(registryValues[6] as string as DeviceSetupScreen));
 
           const mode: any = registryValues[7] as any;
           dispatch(setScreenDimensions(mode.width, mode.height));
@@ -105,12 +105,10 @@ export const getBrightSignConfig = () => {
         });
 
       console.log('BrightSign configuration retrieved');
-      dispatch(setPlatform('BrightSign'));
     }
     catch (e) {
       console.log('BrightSign javascript call failed');
       console.log(e);
-      dispatch(setPlatform('Desktop'));
     }
   });
 }

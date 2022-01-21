@@ -4,11 +4,15 @@ import { BrightSignAttributes } from '../type';
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const SET_IS_BRIGHTWALL = 'SET_IS_BRIGHTWALL';
-export const SET_ACTIVE_PRESENTATION_NAME = 'SET_ACTIVE_PRESENTATION_NAME';
-export const SET_SERIAL_NUMBER = 'SET_SERIAL_NUMBER';
-export const SET_MAC_ADDRESS = 'SET_MAC_ADDRESS';
-export const SET_IP_ADDRESS = 'SET_IP_ADDRESS';
+const SET_SERIAL_NUMBER = 'SET_SERIAL_NUMBER';
+const SET_ACTIVE_PRESENTATION_NAME = 'SET_ACTIVE_PRESENTATION_NAME';
+const SET_IS_BRIGHTWALL = 'SET_IS_BRIGHTWALL';
+const SET_MAC_ADDRESS = 'SET_MAC_ADDRESS';
+const SET_IP_ADDRESS = 'SET_IP_ADDRESS';
+const SET_IS_MASTER = 'SET_IS_MASTER';
+const SET_ROW_INDEX = 'SET_ROW_INDEX';
+const SET_COLUMN_INDEX = 'SET_COLUMN_INDEX';
+const SET_BEZEL_DIMENSIONS = 'SET_BEZEL_DIMENSIONS';
 
 // ------------------------------------
 // Actions
@@ -94,6 +98,82 @@ export const setIpAddress = (
   };
 };
 
+export interface SetIsMasterPayload {
+  isMaster: boolean;
+}
+type SetIsMasterAction = BrightWallModelAction<SetIsMasterPayload>;
+
+export const setIsMaster = (
+  isMaster: boolean,
+): SetIsMasterAction => {
+  return {
+    type: SET_IS_MASTER,
+    payload: {
+      isMaster,
+    },
+  };
+};
+
+export interface SetRowIndexPayload {
+  rowIndex: number;
+}
+type SetRowIndexAction = BrightWallModelAction<SetRowIndexPayload>;
+
+export const setRowIndex = (
+  rowIndex: number,
+): SetRowIndexAction => {
+  return {
+    type: SET_ROW_INDEX,
+    payload: {
+      rowIndex,
+    },
+  };
+};
+
+export interface SetColumnIndexPayload {
+  columnIndex: number;
+}
+type SetColumnIndexAction = BrightWallModelAction<SetColumnIndexPayload>;
+
+export const setColumnIndex = (
+  columnIndex: number,
+): SetColumnIndexAction => {
+  return {
+    type: SET_COLUMN_INDEX,
+    payload: {
+      columnIndex,
+    },
+  };
+};
+
+export interface SetBezelDimensionsPayload {
+  serialNumber: string;
+  bezelWidth: number;
+  bezelHeight: number;
+  screenWidth: number;
+  screenHeight: number;
+}
+type SetBezelDimensionsAction = BrightWallModelAction<SetBezelDimensionsPayload>;
+
+export const updateBezelDimensions = (
+  serialNumber: string,
+  bezelWidth: number,
+  bezelHeight: number,
+  screenWidth: number,
+  screenHeight: number,
+): SetBezelDimensionsAction => {
+  return {
+    type: SET_BEZEL_DIMENSIONS,
+    payload: {
+      serialNumber,
+      bezelWidth,
+      bezelHeight,
+      screenWidth,
+      screenHeight,
+    },
+  };
+};
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
@@ -104,28 +184,35 @@ const initialState: BrightSignAttributes = {
   serialNumber: '',
   ipAddress: '',
   activePresentationName: '',
+  isMaster: false,
+  rowIndex: -1,
+  columnIndex: -1,
+  bezelWidth: 0,
+  bezelHeight: 0,
+  bezelScreenWidth: 0,
+  bezelScreenHeight: 0,
 };
 
 
 export const brightSignAttributesReducer = (
   state: BrightSignAttributes = initialState,
-  action: SetIsBrightWallAction & SetSerialNumberAction & SetMacAddressAction & SetIpAddressAction & SetActivePresentationNameAction
+  action: SetSerialNumberAction & SetActivePresentationNameAction & SetIsBrightWallAction & SetMacAddressAction & SetIpAddressAction & SetIsMasterAction & SetBezelDimensionsAction & SetRowIndexAction & SetColumnIndexAction
 ): BrightSignAttributes => {
   switch (action.type) {
-    case SET_IS_BRIGHTWALL:
+    case SET_SERIAL_NUMBER:
       return {
         ...state,
-        isBrightWall: action.payload.isBrightWall,
+        serialNumber: action.payload.serialNumber,
       };
     case SET_ACTIVE_PRESENTATION_NAME:
       return {
         ...state,
         activePresentationName: action.payload.activePresentationName,
       }
-      case SET_SERIAL_NUMBER:
+    case SET_IS_BRIGHTWALL:
       return {
         ...state,
-        serialNumber: action.payload.serialNumber,
+        isBrightWall: action.payload.isBrightWall,
       };
     case SET_MAC_ADDRESS:
       return {
@@ -136,6 +223,30 @@ export const brightSignAttributesReducer = (
       return {
         ...state,
         ipAddress: action.payload.ipAddress,
+      };
+    case SET_BEZEL_DIMENSIONS:
+      return {
+        ...state,
+        bezelWidth: action.payload.bezelWidth,
+        bezelHeight: action.payload.bezelHeight,
+        bezelScreenWidth: action.payload.screenWidth,
+        bezelScreenHeight: action.payload.screenHeight,
+
+      }
+    case SET_IS_MASTER:
+      return {
+        ...state,
+        isMaster: action.payload.isMaster,
+      };
+    case SET_ROW_INDEX:
+      return {
+        ...state,
+        rowIndex: action.payload.rowIndex,
+      };
+    case SET_COLUMN_INDEX:
+      return {
+        ...state,
+        columnIndex: action.payload.columnIndex,
       };
     default:
       return state;
