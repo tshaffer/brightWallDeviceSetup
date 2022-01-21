@@ -1,14 +1,40 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { getBezelHeight, getBezelScreenHeight, getBezelScreenWidth, getBezelWidth } from '../selector';
 
 import '../styles/deviceSetup.css';
 
-const AlignmentScreen = () => {
+export interface AlignmentScreenProps {
+  bezelWidth: number;
+  bezelHeight: number;
+  bezelScreenWidth: number;
+  bezelScreenHeight: number;
+}
+// -----------------------------------------------------------------------
+// Component
+// -----------------------------------------------------------------------
+
+const AlignmentScreen = (props: AlignmentScreenProps) => {
+
+  let viewBoxSpec = '0 0 500 500';
+
+  if (props.bezelScreenWidth > 0 && props.bezelScreenHeight > 0) {
+    const monitorWidth = props.bezelScreenWidth + props.bezelWidth * 2;
+    const xStart = props.bezelWidth / monitorWidth * 500;
+    const xEnd = (monitorWidth - props.bezelWidth) / monitorWidth * 500;
+  
+    const monitorHeight = props.bezelScreenHeight + props.bezelHeight * 2;
+    const yStart = props.bezelHeight / monitorHeight * 500;
+    const yEnd = (monitorHeight - props.bezelHeight) / monitorHeight * 500;
+  
+    viewBoxSpec = xStart.toString() + ' ' + yStart.toString() + ' ' + xEnd.toString() + ' ' + yEnd.toString();
+  }
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      viewBox="0 0 500 500"
+      viewBox={viewBoxSpec}
       preserveAspectRatio='none'
       className='testAlignmentScreenContainer'
     >
@@ -39,4 +65,15 @@ const AlignmentScreen = () => {
   );
 };
 
-export default AlignmentScreen;
+function mapStateToProps(state: any): Partial<AlignmentScreenProps> {
+  return {
+    bezelWidth: getBezelWidth(state),
+    bezelHeight: getBezelHeight(state),
+    bezelScreenWidth: getBezelScreenWidth(state),
+    bezelScreenHeight: getBezelScreenHeight(state),
+  };
+}
+
+export default connect(mapStateToProps)(AlignmentScreen);
+
+
