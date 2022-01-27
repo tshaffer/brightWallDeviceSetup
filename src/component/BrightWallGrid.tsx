@@ -45,15 +45,6 @@ const BrightWallGrid = (props: BrightWallGridProps) => {
   return (
     <div className='screenGridContainer' style={style}>
       {map(labels, (item: string) => {
-
-        console.log('item: ' + item);
-        console.log('devicePosition: ' + devicePosition);
-        if (devicePosition === item) {
-          console.log('match');
-        }
-        else {
-          console.log('no match');
-        }
         let className = 'screenGridItemContainer';
         if (item === devicePosition) {
           className = 'selectedScreenGridItemContainer';

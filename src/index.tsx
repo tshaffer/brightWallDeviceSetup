@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { brightWallModelReducer, setActivePresentationName, setColumnIndex, setIsMaster, setRowIndex } from './model';
+import { brightWallModelReducer, setActivePresentationName, setColumnIndex, setIsBrightWallConfiguratorHost, setIsMaster, setRowIndex } from './model';
 
 import App from './component/App';
 import { isNil } from 'lodash';
@@ -70,6 +70,14 @@ bsMessage.onbsmessage = (msg: any) => {
           console.log('activePresentationName');
           console.log(activePresentationName);
           store.dispatch(setActivePresentationName(activePresentationName));
+        }
+        break;
+      case 'setIsBrightWallConfiguratorHost':
+        if (msg.data.hasOwnProperty('data')) {
+          const isBrightWallConfiguratorHost: boolean = msg.data['data'];
+          console.log('isBrightWallConfiguratorHost');
+          console.log(isBrightWallConfiguratorHost);
+          store.dispatch(setIsBrightWallConfiguratorHost(isBrightWallConfiguratorHost));
         }
         break;
       default:

@@ -43,7 +43,7 @@ body {
   align-self: center;
 
   font-family: 'PTSans';
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .screenTopPaddingContainer {
@@ -89,6 +89,7 @@ body {
 
 .screenGridContainer .selectedScreenGridItemContainer {
   box-sizing: border-box;
+  display: flex;
 
   border-color: #9800FE;
   background-color: #9800FE;
@@ -165,7 +166,7 @@ body {
   padding-left: 15px;
 
   font-family: 'PTSans';
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .screenInfoContainer .screenPositionInfoContainer {
@@ -186,7 +187,7 @@ body {
   vertical-align: middle;
 
   font-family: 'PTSans';
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .screenInfoContainer .screenPositionInfoContainer .screenNameValue {

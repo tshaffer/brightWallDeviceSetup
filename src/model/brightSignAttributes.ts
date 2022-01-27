@@ -13,6 +13,7 @@ const SET_IS_MASTER = 'SET_IS_MASTER';
 const SET_ROW_INDEX = 'SET_ROW_INDEX';
 const SET_COLUMN_INDEX = 'SET_COLUMN_INDEX';
 const SET_BEZEL_DIMENSIONS = 'SET_BEZEL_DIMENSIONS';
+const SET_IS_BRIGHTWALL_CONFIGURATOR_HOST = 'SET_IS_BRIGHTWALL_CONFIGURATOR_HOST';
 
 // ------------------------------------
 // Actions
@@ -114,6 +115,23 @@ export const setIsMaster = (
   };
 };
 
+export interface SetIsBrightWallConfiguratorHostPayload {
+  isBrightWallConfiguratorHost: boolean;
+}
+type SetIsBrightWallConfiguratorHostAction = BrightWallModelAction<SetIsBrightWallConfiguratorHostPayload>;
+
+export const setIsBrightWallConfiguratorHost = (
+  isBrightWallConfiguratorHost: boolean,
+): SetIsBrightWallConfiguratorHostAction => {
+  return {
+    type: SET_IS_BRIGHTWALL_CONFIGURATOR_HOST,
+    payload: {
+      isBrightWallConfiguratorHost,
+    },
+  };
+};
+
+
 export interface SetRowIndexPayload {
   rowIndex: number;
 }
@@ -185,6 +203,7 @@ const initialState: BrightSignAttributes = {
   ipAddress: '',
   activePresentationName: '',
   isMaster: false,
+  isBrightWallConfiguratorHost: false,
   rowIndex: -1,
   columnIndex: -1,
   bezelWidth: 0,
@@ -196,7 +215,7 @@ const initialState: BrightSignAttributes = {
 
 export const brightSignAttributesReducer = (
   state: BrightSignAttributes = initialState,
-  action: SetSerialNumberAction & SetActivePresentationNameAction & SetIsBrightWallAction & SetMacAddressAction & SetIpAddressAction & SetIsMasterAction & SetBezelDimensionsAction & SetRowIndexAction & SetColumnIndexAction
+  action: SetSerialNumberAction & SetActivePresentationNameAction & SetIsBrightWallAction & SetMacAddressAction & SetIpAddressAction & SetIsMasterAction & SetIsBrightWallConfiguratorHostAction & SetBezelDimensionsAction & SetRowIndexAction & SetColumnIndexAction
 ): BrightSignAttributes => {
   switch (action.type) {
     case SET_SERIAL_NUMBER:
@@ -237,6 +256,11 @@ export const brightSignAttributesReducer = (
       return {
         ...state,
         isMaster: action.payload.isMaster,
+      };
+    case SET_IS_BRIGHTWALL_CONFIGURATOR_HOST:
+      return {
+        ...state,
+        isBrightWallConfiguratorHost: action.payload.isBrightWallConfiguratorHost,
       };
     case SET_ROW_INDEX:
       return {

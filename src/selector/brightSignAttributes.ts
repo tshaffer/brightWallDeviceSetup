@@ -24,6 +24,10 @@ export const getIsMaster = (state: BrightSignConfig): boolean => {
   return state.brightSignAttributes.isMaster;
 };
 
+export const getIsBrightWallConfiguratorHost = (state: BrightSignConfig): boolean => {
+  return state.brightSignAttributes.isBrightWallConfiguratorHost;
+};
+
 export const getRowIndex = (state: BrightSignConfig): number => {
   return state.brightSignAttributes.rowIndex;
 };

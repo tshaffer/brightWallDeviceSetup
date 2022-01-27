@@ -10,6 +10,7 @@ export interface BrightSignAttributes {
   macAddress: string;
   ipAddress: string;
   isMaster: boolean;
+  isBrightWallConfiguratorHost: boolean;
   rowIndex: number;
   columnIndex: number;
   bezelWidth: number;
