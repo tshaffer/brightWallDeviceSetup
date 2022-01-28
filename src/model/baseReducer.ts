@@ -7,6 +7,7 @@ import { BrightSignConfig } from '../type';
 import { 
   brightSignAttributesReducer, 
  } from './brightSignAttributes';
+import { brightSignsInWallReducer } from './brightSignsInWall';
  import { 
   brightWallAttributesReducer
  } from './brightWallAttributes';
@@ -22,6 +23,7 @@ import {
 export const brightWallModelReducer = combineReducers<BrightSignConfig>({
   brightSignAttributes: brightSignAttributesReducer,
   brightWallAttributes: brightWallAttributesReducer,
+  brightSignsInWall: brightSignsInWallReducer,
 });
 
 // -----------------------------------------------------------------------

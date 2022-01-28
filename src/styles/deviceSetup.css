@@ -113,7 +113,7 @@ body {
   flex-shrink: 0;
 
   font-family: 'PTSans';
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .screenGridContainer .screenGridItemContainer .indexContainer {
@@ -124,7 +124,7 @@ body {
   flex-shrink: 0;
 
   font-family: 'PTSans';
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .screenInfoContainer .deviceInfoContainer {
