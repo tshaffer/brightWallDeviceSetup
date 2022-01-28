@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-import { brightWallModelReducer, setActivePresentationName, setColumnIndex, setIsBrightWallConfiguratorHost, setIsMaster, setRowIndex } from './model';
+import { brightWallModelReducer, setActivePresentationName, setColumnIndex, setIsBrightWallConfiguratorHost, setIsMaster, setRowIndex, updateBezelDimensions } from './model';
 
 import App from './component/App';
 import { isNil } from 'lodash';
@@ -119,6 +119,17 @@ bsMessage.onbsmessage = (msg: any) => {
           }
         }
         break;
+      case 'setBezelDimensions':
+        if (msg.data.hasOwnProperty('data')) {
+          const bezelDimensionsStr: string = msg.data['data'];
+          const bezelDimensions: any = JSON.parse(bezelDimensionsStr);
+          const bezelWidth = parseInt(bezelDimensions.bezelwidth, 10);
+          const bezelHeight = parseInt(bezelDimensions.bezelheight, 10);
+          const bezelScreenWidth = parseInt(bezelDimensions.bezelscreenwidth, 10);
+          const bezelScreenHeight = parseInt(bezelDimensions.bezelscreenheight, 10);
+          store.dispatch(updateBezelDimensions(bezelWidth, bezelHeight, bezelScreenWidth, bezelScreenHeight));
+        }
+        break;
       default:
         console.log('no command match');
         console.log(msg.data['command']);
@@ -126,24 +137,6 @@ bsMessage.onbsmessage = (msg: any) => {
     }
   }
 }
-
-/*  
-"brightSignAttributes":{"activePresentationName":"bwResizeTest","autorunVersion":"L8J81R001023","bezelHeight":0,"bezelScreenHeight":336,"bezelScreenWidth":610,"bezelWidth":14,"columnIndex":1,"deviceFWVersion":"8.4.10","deviceFamily":"impala","deviceModel":"XT1143","isBrightWall":true,"isMaster":true,
-
-"networkInterfaces":{"eth0":{"currentConfig":{"client_identifier":"BrightSign:L8J81R001023","configured_proxy":"","current_proxy":"","dhcp":true,"dns_servers":["192.168.86.1"],"domain":"lan","domains":["lan"],"ethernet_mac":"90:ac:3f:0f:75:21","hostname":"BrightSign-L8J81R001023","ip4_address":"192.168.86.35","ip4_broadcast":"192.168.86.255","ip4_gateway":"192.168.86.1","ip4_netmask":"255.255.255.0","link":true,"mdns_hostname":"BrightSign-L8J81R001023.local","metric":0,"proxy_bypass":"<none>","shape_inbound":0,"time_server":"http://time.brightsignnetwork.com/","type":"<...>
-{ 2093.774} },"hostName":"BrightSign-L8J81R001023","id":"eth0"}},
-
-"rowIndex":0,"serialNumber":"L8J81R001023","unitDescription":"","unitName":"tedSlave","unitNamingMethod":"appendUnitIDToUnitName"},
-
-"brightWallAttributes":{"brightWallDeviceSetupActiveScreen":"ConfigureScreen","brightWallSetupScreenEnabled":true,"numColumns":2,"numRows":1}},{"brightSignAttributes":{"activePresentationName":"bwResizeTest","autorunVersion":"D7D834000029","bezelHeight":0,"bezelScreenHeight":336,"bezelScreenWidth":610,"bezelWidth":14,"columnIndex":0,"deviceFWVersion":"8.4.10","deviceFamily":"malibu","deviceModel":"XT1144","isBrightWall":true,"isMaster":true,
-
-"networkInterfaces":{"eth0":{"currentConfig":{"client_identifier":"BrightSign:D7D834000029","configured_proxy":"","current_proxy":"","dhcp":true,"dns_servers":["192.168.86.1"],"domain":"lan","domains":["lan"],"ethernet_mac":"90:ac:3f:10:00:16","hostname":"BrightSign-D7D834000029","ip4_address":"192.168.86.20","ip4_broadcast":"192.168.86.255","ip4_gateway<...>
-{ 2093.774} .168.86.1","ip4_netmask":"255.255.255.0","link":true,"mdns_hostname":"BrightSign-D7D834000029.local","metric":203,"proxy_bypass":"<none>","shape_inbound":0,"time_server":"ntp://time.brightsignnetwork.com","type":"wired"},"hostName":"BrightSign-D7D834000029","id":"eth0"}},
-
-"rowIndex":0,"serialNumber":"D7D834000029","unitDescription":"tedMaster","unitName":"","unitNamingMethod":"appendUnitIDToUnitName"},
-
-"brightWallAttributes":{"brightWallDeviceSetupActiveScreen":"ConfigureScreen","brightWallSetupScreenEnabled":true,"numColumns":2,"numRows":1}}]}"
-*/
 
 const store = createStore(
   brightWallModelReducer,

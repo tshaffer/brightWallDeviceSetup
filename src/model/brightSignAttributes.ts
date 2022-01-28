@@ -173,7 +173,6 @@ export const setColumnIndex = (
 };
 
 export interface SetBezelDimensionsPayload {
-  serialNumber: string;
   bezelWidth: number;
   bezelHeight: number;
   screenWidth: number;
@@ -182,7 +181,6 @@ export interface SetBezelDimensionsPayload {
 type SetBezelDimensionsAction = BrightWallModelAction<SetBezelDimensionsPayload>;
 
 export const updateBezelDimensions = (
-  serialNumber: string,
   bezelWidth: number,
   bezelHeight: number,
   screenWidth: number,
@@ -191,7 +189,6 @@ export const updateBezelDimensions = (
   return {
     type: SET_BEZEL_DIMENSIONS,
     payload: {
-      serialNumber,
       bezelWidth,
       bezelHeight,
       screenWidth,
@@ -258,7 +255,6 @@ export const brightSignAttributesReducer = (
         bezelHeight: action.payload.bezelHeight,
         bezelScreenWidth: action.payload.screenWidth,
         bezelScreenHeight: action.payload.screenHeight,
-
       }
     case SET_IS_MASTER:
       return {

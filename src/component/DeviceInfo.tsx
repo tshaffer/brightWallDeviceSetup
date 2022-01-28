@@ -8,6 +8,10 @@ import {
   getMacAddress,
   getIsMaster,
   getIpAddress,
+  getBezelWidth,
+  getBezelHeight,
+  getBezelScreenWidth,
+  getBezelScreenHeight,
 } from '../selector';
 
 export interface DeviceInfoProps {
@@ -15,6 +19,10 @@ export interface DeviceInfoProps {
   macAddress: string,
   serialNumber: string,
   isMaster: boolean,
+  bezelWidth: number,
+  bezelHeight: number,
+  bezelScreenWidth: number,
+  bezelScreenHeight: number,
 }
 
 // -----------------------------------------------------------------------
@@ -24,7 +32,7 @@ export interface DeviceInfoProps {
 const DeviceInfo = (props: DeviceInfoProps) => {
 
   const masterOrSlaveLabel = props.isMaster ? 'Master' : 'Slave';
-
+  const bezelLabel: string = props.bezelWidth.toString() + ' ' + props.bezelHeight.toString() + ' ' + props.bezelScreenWidth.toString() + ' ' + props.bezelScreenHeight.toString();
   return (
     <div className='deviceInfoContainer'>
       <div className='deviceInfoRow'>
@@ -46,6 +54,11 @@ const DeviceInfo = (props: DeviceInfoProps) => {
         <div className='deviceInfoLabel'>Master/Slave:</div>
         <div className='deviceInfoValue'>{masterOrSlaveLabel}</div>
       </div>
+
+      <div className='deviceInfoRow'>
+        <div className='deviceInfoLabel'>Bezel settings:</div>
+        <div className='deviceInfoValue'>{bezelLabel}</div>
+      </div>
     </div>
   );
 };
@@ -56,6 +69,10 @@ function mapStateToProps(state: any): Partial<DeviceInfoProps> {
     macAddress: getMacAddress(state),
     ipAddress: getIpAddress(state),
     isMaster: getIsMaster(state),
+    bezelWidth: getBezelWidth(state),
+    bezelHeight: getBezelHeight(state),
+    bezelScreenWidth: getBezelScreenWidth(state),
+    bezelScreenHeight: getBezelScreenHeight(state),
   };
 }
 
