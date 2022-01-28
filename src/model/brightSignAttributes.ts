@@ -1,5 +1,6 @@
 import { BrightWallModelAction } from './baseAction';
 import { BrightSignAttributes } from '../type';
+import { isString } from 'lodash';
 
 // ------------------------------------
 // Constants
@@ -123,6 +124,13 @@ type SetIsBrightWallConfiguratorHostAction = BrightWallModelAction<SetIsBrightWa
 export const setIsBrightWallConfiguratorHost = (
   isBrightWallConfiguratorHost: boolean,
 ): SetIsBrightWallConfiguratorHostAction => {
+
+  // TEDTODOBW
+  if (isString(isBrightWallConfiguratorHost)) {
+    if ((isBrightWallConfiguratorHost as string).toLowerCase() === '0') {
+      isBrightWallConfiguratorHost = false;
+    }
+  }
   return {
     type: SET_IS_BRIGHTWALL_CONFIGURATOR_HOST,
     payload: {
