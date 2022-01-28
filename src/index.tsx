@@ -92,10 +92,6 @@ bsMessage.onbsmessage = (msg: any) => {
           const brightSignDevicesInWallStr: string = msg.data['data'];
           const brightSignDevicesInWallO: any = JSON.parse(brightSignDevicesInWallStr);
 
-          console.log('brightSignDevicesInWallO keys:');
-          console.log(Object.keys(brightSignDevicesInWallO));
-
-          console.log('brightSignDevicesInWall');
           const brightSignDevicesInWall: any[] = brightSignDevicesInWallO.brightSignDevicesInWallList;
           for (const brightSignDeviceInWall of brightSignDevicesInWall) {
 

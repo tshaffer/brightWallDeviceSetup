@@ -62,17 +62,6 @@ const BrightWallGrid = (props: BrightWallGridProps) => {
     return deviceInfoItems;
   }
 
-  const getLabels = () => {
-    const items: string[] = [];
-    for (let rowIndex = 0; rowIndex < props.numRows; rowIndex++) {
-      for (let columnIndex = 0; columnIndex < props.numColumns; columnIndex++) {
-        items.push(getDevicePositionLabel(rowIndex, columnIndex));
-      }
-    }
-    return items;
-  }
-
-  const labels: string[] = getLabels();
   const deviceInfoItems: any[] = getDeviceInformation();
   
   const devicePosition: string = getDevicePositionLabel(props.rowIndex, props.columnIndex);
@@ -84,12 +73,6 @@ const BrightWallGrid = (props: BrightWallGridProps) => {
         if (deviceInfoItem.positionLabel === devicePosition) {
           className = 'selectedScreenGridItemContainer';
         }
-
-        console.log('index: ' + index.toString());
-        console.log('deviceInfoItem');
-        console.log(deviceInfoItems[index].serialNumber);
-        console.log(deviceInfoItems[index].ipAddress);
-        console.log(deviceInfoItems[index].isMaster);
 
         return (
           <div className={className} key={`position_${deviceInfoItem.positionLabel}`}>
