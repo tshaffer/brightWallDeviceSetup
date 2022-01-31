@@ -15,6 +15,7 @@ import BrightWallGrid from './BrightWallGrid';
 
 import DeviceInfo from './DeviceInfo';
 import ScreenPosition from './ScreenPosition';
+import DeviceBezelInfo from './DeviceBezelInfo';
 
 export interface BrightWallDeviceSetupProps {
   ipAddress: string,
@@ -63,6 +64,8 @@ const BrightWallDeviceSetup = (props: BrightWallDeviceSetupProps) => {
       <DeviceInfo />
 
       <ScreenPosition />
+
+      <DeviceBezelInfo />
 
     </div>
   );

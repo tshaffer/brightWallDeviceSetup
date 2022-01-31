@@ -54,11 +54,6 @@ const DeviceInfo = (props: DeviceInfoProps) => {
         <div className='deviceInfoLabel'>Master/Slave:</div>
         <div className='deviceInfoValue'>{masterOrSlaveLabel}</div>
       </div>
-
-      <div className='deviceInfoRow'>
-        <div className='deviceInfoLabel'>Bezel settings:</div>
-        <div className='deviceInfoValue'>{bezelLabel}</div>
-      </div>
     </div>
   );
 };
