@@ -123,10 +123,10 @@ bsMessage.onbsmessage = (msg: any) => {
         if (msg.data.hasOwnProperty('data')) {
           const bezelDimensionsStr: string = msg.data['data'];
           const bezelDimensions: any = JSON.parse(bezelDimensionsStr);
-          const bezelWidth = parseInt(bezelDimensions.bezelwidth, 10);
-          const bezelHeight = parseInt(bezelDimensions.bezelheight, 10);
-          const bezelScreenWidth = parseInt(bezelDimensions.bezelscreenwidth, 10);
-          const bezelScreenHeight = parseInt(bezelDimensions.bezelscreenheight, 10);
+          const bezelWidth = parseFloat(bezelDimensions.bezelwidth);
+          const bezelHeight = parseFloat(bezelDimensions.bezelheight);
+          const bezelScreenWidth = parseFloat(bezelDimensions.bezelscreenwidth);
+          const bezelScreenHeight = parseFloat(bezelDimensions.bezelscreenheight);
           store.dispatch(updateBezelDimensions(bezelWidth, bezelHeight, bezelScreenWidth, bezelScreenHeight));
         }
         break;
