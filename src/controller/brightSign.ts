@@ -73,8 +73,10 @@ export const getBrightSignConfig = () => {
       promises.push(registry.read('networking', 'brightWallColumnIndex'));
       promises.push(registry.read('networking', 'sync_master'));
       promises.push(registry.read('networking', 'brightWallDeviceSetupActiveScreen'));
-      promises.push(registry.read('networking', 'bezelWidth'));
-      promises.push(registry.read('networking', 'bezelHeight'));
+      promises.push(registry.read('networking', 'bezelLeft'));
+      promises.push(registry.read('networking', 'bezelRight'));
+      promises.push(registry.read('networking', 'bezelTop'));
+      promises.push(registry.read('networking', 'bezelBottom'));
       promises.push(registry.read('networking', 'bezelScreenWidth'));
       promises.push(registry.read('networking', 'bezelScreenHeight'));
       promises.push(videoConfig.getActiveMode());
@@ -100,11 +102,13 @@ export const getBrightSignConfig = () => {
 
           dispatch(setActiveSetupScreen(registryValues[6] as string as DeviceSetupScreen));
 
-          const bezelWidth = tryConvertStringToNumber((registryValues[7] as string), -1);
-          const bezelHeight = tryConvertStringToNumber((registryValues[8] as string), -1);
-          const bezelScreenWidth = tryConvertStringToNumber((registryValues[9] as string), -1);
-          const bezelScreenHeight = tryConvertStringToNumber((registryValues[10] as string), -1);
-          dispatch(updateBezelDimensions(bezelWidth, bezelHeight, bezelScreenWidth, bezelScreenHeight));
+          const bezelLeft = tryConvertStringToNumber((registryValues[7] as string), -1);
+          const bezelRight = tryConvertStringToNumber((registryValues[8] as string), -1);
+          const bezelTop = tryConvertStringToNumber((registryValues[9] as string), -1);
+          const bezelBottom = tryConvertStringToNumber((registryValues[10] as string), -1);
+          const bezelScreenWidth = tryConvertStringToNumber((registryValues[11] as string), -1);
+          const bezelScreenHeight = tryConvertStringToNumber((registryValues[12] as string), -1);
+          dispatch(updateBezelDimensions(bezelLeft, bezelRight, bezelTop, bezelBottom, bezelScreenWidth, bezelScreenHeight));
 
           const mode: any = registryValues[11] as any;
           dispatch(setScreenDimensions(mode.width, mode.height));

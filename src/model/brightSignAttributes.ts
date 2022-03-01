@@ -173,24 +173,30 @@ export const setColumnIndex = (
 };
 
 export interface SetBezelDimensionsPayload {
-  bezelWidth: number;
-  bezelHeight: number;
+  bezelLeft: number;
+  bezelRight: number;
+  bezelTop: number;
+  bezelBottom: number;
   screenWidth: number;
   screenHeight: number;
 }
 type SetBezelDimensionsAction = BrightWallModelAction<SetBezelDimensionsPayload>;
 
 export const updateBezelDimensions = (
-  bezelWidth: number,
-  bezelHeight: number,
+  bezelLeft: number,
+  bezelRight: number,
+  bezelTop: number,
+  bezelBottom: number,
   screenWidth: number,
   screenHeight: number,
 ): SetBezelDimensionsAction => {
   return {
     type: SET_BEZEL_DIMENSIONS,
     payload: {
-      bezelWidth,
-      bezelHeight,
+      bezelLeft,
+      bezelRight,
+      bezelTop,
+      bezelBottom,
       screenWidth,
       screenHeight,
     },
@@ -211,8 +217,10 @@ const initialState: BrightSignAttributes = {
   isBrightWallConfiguratorHost: false,
   rowIndex: -1,
   columnIndex: -1,
-  bezelWidth: 0,
-  bezelHeight: 0,
+  bezelLeft: 0,
+  bezelRight: 0,
+  bezelTop: 0,
+  bezelBottom: 0,
   bezelScreenWidth: 0,
   bezelScreenHeight: 0,
 };
@@ -251,8 +259,10 @@ export const brightSignAttributesReducer = (
     case SET_BEZEL_DIMENSIONS:
       return {
         ...state,
-        bezelWidth: action.payload.bezelWidth,
-        bezelHeight: action.payload.bezelHeight,
+        bezelLeft: action.payload.bezelLeft,
+        bezelRight: action.payload.bezelRight,
+        bezelTop: action.payload.bezelTop,
+        bezelBottom: action.payload.bezelBottom,
         bezelScreenWidth: action.payload.screenWidth,
         bezelScreenHeight: action.payload.screenHeight,
       }

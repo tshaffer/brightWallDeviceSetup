@@ -36,12 +36,20 @@ export const getColumnIndex = (state: BrightSignConfig): number => {
   return state.brightSignAttributes.columnIndex;
 };
 
-export const getBezelWidth = (state: BrightSignConfig): number => {
-  return state.brightSignAttributes.bezelWidth;
+export const getBezelLeft = (state: BrightSignConfig): number => {
+  return state.brightSignAttributes.bezelLeft;
 };
 
-export const getBezelHeight = (state: BrightSignConfig): number => {
-  return state.brightSignAttributes.bezelHeight;
+export const getBezelRight = (state: BrightSignConfig): number => {
+  return state.brightSignAttributes.bezelRight;
+};
+
+export const getBezelTop = (state: BrightSignConfig): number => {
+  return state.brightSignAttributes.bezelTop;
+};
+
+export const getBezelBottom = (state: BrightSignConfig): number => {
+  return state.brightSignAttributes.bezelBottom;
 };
 
 export const getBezelScreenWidth = (state: BrightSignConfig): number => {

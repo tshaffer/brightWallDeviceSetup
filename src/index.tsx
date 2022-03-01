@@ -96,7 +96,7 @@ bsMessage.onbsmessage = (msg: any) => {
           for (const brightSignDeviceInWall of brightSignDevicesInWall) {
 
             const brightSignAttributes: any = brightSignDeviceInWall.brightSignAttributes;
-            const { serialNumber, isMaster, rowIndex, columnIndex, bezelWidth, bezelHeight, bezelScreenWidth, bezelScreenHeight } = brightSignAttributes;
+            const { serialNumber, isMaster, rowIndex, columnIndex, bezelLeft, bezelRight, bezelTop, bezelBottom, bezelScreenWidth, bezelScreenHeight } = brightSignAttributes;
             const networkInterfaces: NetworkInterfaceMap = brightSignAttributes.networkInterfaces;
 
             // TEDTODOBW - hardcoded eth0
@@ -110,8 +110,10 @@ bsMessage.onbsmessage = (msg: any) => {
               isMaster,
               rowIndex,
               columnIndex,
-              bezelWidth,
-              bezelHeight,
+              bezelLeft,
+              bezelRight,
+              bezelTop,
+              bezelBottom,
               bezelScreenWidth,
               bezelScreenHeight,
             }
@@ -123,11 +125,13 @@ bsMessage.onbsmessage = (msg: any) => {
         if (msg.data.hasOwnProperty('data')) {
           const bezelDimensionsStr: string = msg.data['data'];
           const bezelDimensions: any = JSON.parse(bezelDimensionsStr);
-          const bezelWidth = parseFloat(bezelDimensions.bezelwidth);
-          const bezelHeight = parseFloat(bezelDimensions.bezelheight);
+          const bezelLeft = parseFloat(bezelDimensions.bezelleft);
+          const bezelRight = parseFloat(bezelDimensions.bezelright);
+          const bezelTop = parseFloat(bezelDimensions.bezeltop);
+          const bezelBottom = parseFloat(bezelDimensions.bezelbottom);
           const bezelScreenWidth = parseFloat(bezelDimensions.bezelscreenwidth);
           const bezelScreenHeight = parseFloat(bezelDimensions.bezelscreenheight);
-          store.dispatch(updateBezelDimensions(bezelWidth, bezelHeight, bezelScreenWidth, bezelScreenHeight));
+          store.dispatch(updateBezelDimensions(bezelLeft, bezelRight, bezelTop, bezelBottom, bezelScreenWidth, bezelScreenHeight));
         }
         break;
       default:

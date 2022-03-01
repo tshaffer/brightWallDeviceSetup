@@ -14,8 +14,10 @@ export interface BrightSignAttributes {
   isBrightWallConfiguratorHost: boolean;
   rowIndex: number;
   columnIndex: number;
-  bezelWidth: number;
-  bezelHeight: number;
+  bezelLeft: number;
+  bezelRight: number;
+  bezelTop: number;
+  bezelBottom: number;
   bezelScreenWidth: number;
   bezelScreenHeight: number;
 }
@@ -41,8 +43,10 @@ export interface BrightSignInWall {
   isMaster: boolean;
   rowIndex: number;
   columnIndex: number;
-  bezelWidth: number;
-  bezelHeight: number;
+  bezelLeft: number;
+  bezelRight: number;
+  bezelTop: number;
+  bezelBottom: number;
   bezelScreenWidth: number;
   bezelScreenHeight: number;
 }

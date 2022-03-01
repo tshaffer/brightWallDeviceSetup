@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import '../styles/deviceSetup.css';
 
 import {
-  getBezelWidth,
-  getBezelHeight,
+  getBezelLeft,
+  getBezelRight,
+  getBezelTop,
+  getBezelBottom,
   getBezelScreenWidth,
   getBezelScreenHeight,
 } from '../selector';
 
 export interface DeviceInfoProps {
-  bezelWidth: number,
-  bezelHeight: number,
+  bezelLeft: number,
+  bezelRight: number,
+  bezelTop: number,
+  bezelBottom: number,
   bezelScreenWidth: number,
   bezelScreenHeight: number,
 }
@@ -26,12 +30,20 @@ const DeviceInfo = (props: DeviceInfoProps) => {
   return (
     <div className='deviceBezelInfoContainer'>
       <div className='deviceBezelInfoRow'>
-        <div className='deviceBezelInfoLabel'>Bezel width:</div>
-        <div className='deviceBezelInfoValue'>{props.bezelWidth.toString() + ' mm'}</div>
+        <div className='deviceBezelInfoLabel'>Left bezel:</div>
+        <div className='deviceBezelInfoValue'>{props.bezelLeft.toString() + ' mm'}</div>
       </div>
       <div className='deviceBezelInfoRow'>
-        <div className='deviceBezelInfoLabel'>Bezel height:</div>
-        <div className='deviceBezelInfoValue'>{props.bezelHeight.toString() + ' mm'}</div>
+        <div className='deviceBezelInfoLabel'>Right bezel:</div>
+        <div className='deviceBezelInfoValue'>{props.bezelRight.toString() + ' mm'}</div>
+      </div>
+      <div className='deviceBezelInfoRow'>
+        <div className='deviceBezelInfoLabel'>Top bezel:</div>
+        <div className='deviceBezelInfoValue'>{props.bezelTop.toString() + ' mm'}</div>
+      </div>
+      <div className='deviceBezelInfoRow'>
+        <div className='deviceBezelInfoLabel'>Bottom bezel:</div>
+        <div className='deviceBezelInfoValue'>{props.bezelBottom.toString() + ' mm'}</div>
       </div>
       <div className='deviceBezelInfoRow'>
         <div className='deviceBezelInfoLabel'>Screen width:</div>
@@ -47,8 +59,10 @@ const DeviceInfo = (props: DeviceInfoProps) => {
 
 function mapStateToProps(state: any): Partial<DeviceInfoProps> {
   return {
-    bezelWidth: getBezelWidth(state),
-    bezelHeight: getBezelHeight(state),
+    bezelLeft: getBezelLeft(state),
+    bezelRight: getBezelRight(state),
+    bezelTop: getBezelTop(state),
+    bezelBottom: getBezelBottom(state),
     bezelScreenWidth: getBezelScreenWidth(state),
     bezelScreenHeight: getBezelScreenHeight(state),
   };

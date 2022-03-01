@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getBezelHeight, getBezelScreenHeight, getBezelScreenWidth, getBezelWidth } from '../selector';
+import { getBezelTop, getBezelBottom, getBezelScreenHeight, getBezelScreenWidth, getBezelLeft, getBezelRight } from '../selector';
 
 import '../styles/deviceSetup.css';
 
 export interface AlignmentScreenProps {
-  bezelWidth: number;
-  bezelHeight: number;
+  bezelLeft: number;
+  bezelRight: number;
+  bezelTop: number;
+  bezelBottom: number;
   bezelScreenWidth: number;
   bezelScreenHeight: number;
 }
@@ -19,14 +21,14 @@ const AlignmentScreen = (props: AlignmentScreenProps) => {
   let viewBoxSpec = '0 0 500 500';
 
   if (props.bezelScreenWidth > 0 && props.bezelScreenHeight > 0) {
-    const monitorWidth = props.bezelScreenWidth + props.bezelWidth * 2;
-    const xStart = props.bezelWidth / monitorWidth * 500;
-    const xEnd = (monitorWidth - props.bezelWidth) / monitorWidth * 500;
+    const monitorWidth = props.bezelScreenWidth + props.bezelLeft + props.bezelRight;
+    const xStart = props.bezelLeft / monitorWidth * 500;
+    const xEnd = (monitorWidth - props.bezelRight) / monitorWidth * 500;
     const width = xEnd - xStart;
 
-    const monitorHeight = props.bezelScreenHeight + props.bezelHeight * 2;
-    const yStart = props.bezelHeight / monitorHeight * 500;
-    const yEnd = (monitorHeight - props.bezelHeight) / monitorHeight * 500;
+    const monitorHeight = props.bezelScreenHeight + props.bezelTop + props.bezelBottom;
+    const yStart = props.bezelTop / monitorHeight * 500;
+    const yEnd = (monitorHeight - props.bezelBottom) / monitorHeight * 500;
     const height = yEnd - yStart;
 
     viewBoxSpec = xStart.toString() + ' ' + yStart.toString() + ' ' + width.toString() + ' ' + height.toString();
@@ -102,8 +104,9 @@ const AlignmentScreen = (props: AlignmentScreenProps) => {
 
 function mapStateToProps(state: any): Partial<AlignmentScreenProps> {
   return {
-    bezelWidth: getBezelWidth(state),
-    bezelHeight: getBezelHeight(state),
+    bezelLeft: getBezelLeft(state),
+    bezelTop: getBezelTop(state),
+    bezelBottom: getBezelBottom(state),
     bezelScreenWidth: getBezelScreenWidth(state),
     bezelScreenHeight: getBezelScreenHeight(state),
   };
