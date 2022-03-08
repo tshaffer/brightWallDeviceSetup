@@ -105,6 +105,7 @@ const AlignmentScreen = (props: AlignmentScreenProps) => {
 function mapStateToProps(state: any): Partial<AlignmentScreenProps> {
   return {
     bezelLeft: getBezelLeft(state),
+    bezelRight: getBezelRight(state),
     bezelTop: getBezelTop(state),
     bezelBottom: getBezelBottom(state),
     bezelScreenWidth: getBezelScreenWidth(state),
